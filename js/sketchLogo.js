@@ -13,14 +13,16 @@ export let logoSketch = function (p5) {
   p5.setup = function () {
     p5.createCanvas(window.innerWidth, window.innerHeight);
     const skip = 12; //As we have too many values can skip some points.
+
+    //This is where we will create SVG.
     //Push path into x and y arrays.
     for (let i = 0; i < logoDrawing.length; i += skip) {
       x.push(logoDrawing[i].x);
       y.push(logoDrawing[i].y);
     }
     //Get foureir transfrom.
-    fourierX = dft(p5, x);
-    fourierY = dft(p5, y);
+    fourierX = dft(x);
+    fourierY = dft(y);
 
     //The cycles are being drawn in order of frequency. e.g. C0, C1, ... Where C1 has a frequency. Recall frequency is k and we are calulating Ck.
     //Instead it would be better of teh poinst are sorted by magitued
@@ -61,11 +63,11 @@ export let logoSketch = function (p5) {
 
     const dt = p5.TWO_PI / fourierY.length; //Amount of time I move each frame of animatoon.
     //Should be 2pi a full cycle per frame / the number of fourier coefficents.
-    p5.time += dt;
+    time += dt;
 
     //This resets drawing when we complete it.
     if (p5.time > p5.TWO_PI * 2) {
-      p5.time = 0;
+      time = 0;
       path = [];
     }
   };

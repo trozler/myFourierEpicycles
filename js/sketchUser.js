@@ -31,8 +31,8 @@ export let userSketch = function (p5) {
       x.push(drawing[i].x);
       y.push(drawing[i].y);
     }
-    fourierX = dft(p5, x);
-    fourierY = dft(p5, y);
+    fourierX = dft(x);
+    fourierY = dft(y);
 
     fourierX.sort((a, b) => b.amp - a.amp);
     fourierY.sort((a, b) => b.amp - a.amp);
