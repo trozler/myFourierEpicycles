@@ -1,4 +1,4 @@
-import { dft } from "./fourier.js";
+import { complexfft } from "./fourier.js";
 import { epiCycles } from "./epicycles.js";
 
 export let userSketch = function (p5) {
@@ -7,9 +7,7 @@ export let userSketch = function (p5) {
   //2 states eitehr we are taking user input or we completing a fourier transform.
 
   let x = [];
-  let y = [];
-  let fourierX = [];
-  let fourierY = [];
+  let fourierCoef = [];
   let time = 0;
   let path = [];
   let drawing = [];
@@ -19,7 +17,6 @@ export let userSketch = function (p5) {
     state = USER; //Click mouse state user.
     drawing = [];
     x = [];
-    y = [];
     time = 0;
     path = [];
   };
@@ -29,13 +26,10 @@ export let userSketch = function (p5) {
     const skip = 1; //Skip every other point.
     for (let i = 0; i < drawing.length; i += skip) {
       x.push(drawing[i].x);
-      y.push(drawing[i].y);
+      x.push(drawing[i].y);
     }
-    fourierX = dft(x);
-    fourierY = dft(y);
-
-    fourierX.sort((a, b) => b.amp - a.amp);
-    fourierY.sort((a, b) => b.amp - a.amp);
+    fourierCoef = complexfft(x);
+    fourierCoef.sort((a, b) => b.amp - a.amp);
   };
 
   p5.setup = function () {
@@ -60,13 +54,8 @@ export let userSketch = function (p5) {
       }
       p5.endShape();
     } else if (state == FOURIER) {
-      let vx = epiCycles(p5, time, p5.width / 2, 100, 0, fourierX);
-      let vy = epiCycles(p5, time, 100, p5.height / 2, p5.HALF_PI, fourierY);
-      let v = p5.createVector(vx.x, vy.y);
+      let v = epiCycles(p5, time, p5.width / 2, p5.height / 2, 0, fourierCoef);
       path.push(v);
-      p5.line(vx.x, vx.y, v.x, v.y);
-      p5.line(vy.x, vy.y, v.x, v.y);
-
       p5.beginShape();
       p5.noFill();
       for (let i = 0; i < path.length; i++) {
@@ -74,7 +63,7 @@ export let userSketch = function (p5) {
       }
       p5.endShape();
 
-      const dt = p5.TWO_PI / fourierY.length;
+      const dt = p5.TWO_PI / fourierCoef.length;
       time += dt;
 
       if (time > p5.TWO_PI) {

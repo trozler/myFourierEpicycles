@@ -1,5 +1,10 @@
 import FFT from "../node_modules/fft.js/lib/fft.js";
 
+/**
+ * @function dft This is the brute force method O(n^2)
+ * @param { Array<Number>} points Array of values of some wave. Must be a power of 2.
+ */
+
 export function dft(points) {
   const fftData = [];
   const N = points.length;
@@ -24,6 +29,7 @@ export function dft(points) {
 
 /**
  * @function complexfft Input array of form [x1, y1, x2, y2, ....]. We treat yj as the imaginary component of zj = xj + iyj, for all j. Output complex fourier coeficients.
+ * This uses the cooley turkey implmentation.
  * @param { Array<Number>} points Array of values of some wave. Must be a power of 2.
  */
 
@@ -31,7 +37,7 @@ export function complexfft(points) {
   if (points.length == 0) {
     return [];
   }
-  const numPoints = points.length / 2;
+  let numPoints = points.length / 2;
   const fftData = [];
 
   //Has to be power of 2.
@@ -40,17 +46,17 @@ export function complexfft(points) {
     power *= 2;
   }
   if (!(power === points.length)) {
-    for (let i = 0; i <= power - points.length; i++) {
+    for (let i = 0; i < power - numPoints * 2; i++) {
       points.push(0);
     }
   }
+
+  numPoints = points.length / 2;
 
   const fft = new FFT(numPoints);
   const out = fft.createComplexArray();
   fft.transform(out, points);
 
-  // Transform into an API of points I find friendlier.
-  const fftData = [];
   for (let k = 0; k < numPoints; k++) {
     const re = out[2 * k] / numPoints;
     const im = out[2 * k + 1] / numPoints;

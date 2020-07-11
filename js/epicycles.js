@@ -7,7 +7,6 @@ export function epiCycles(p5, time, runningX, runningY, rotation, fourier) {
     let radius = fourier[i].amp;
     let phase = fourier[i].phase;
     runningX += radius * p5.cos(freq * time + phase + rotation);
-
     runningY += radius * p5.sin(freq * time + phase + rotation);
 
     p5.stroke(255, 100);
