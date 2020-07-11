@@ -1,4 +1,4 @@
-import { dft } from "./fourier.js";
+import { dft, realFFT } from "./fourier.js";
 import { logoDrawing } from "./codingtrain.js";
 import { epiCycles } from "./epicycles.js";
 
@@ -19,8 +19,9 @@ export let logoSketch = function (p5) {
       y.push(logoDrawing[i].y);
     }
     //Get foureir transfrom.
-    fourierX = dft(p5, x);
-    fourierY = dft(p5, y);
+    let sclae = 1;
+    fourierX = dft(p5, x, scale);
+    fourierY = dft(p5, y, scale.);
 
     //The cycles are being drawn in order of frequency. e.g. C0, C1, ... Where C1 has a frequency. Recall frequency is k and we are calulating Ck.
     //Instead it would be better of teh poinst are sorted by magitued
@@ -61,11 +62,11 @@ export let logoSketch = function (p5) {
 
     const dt = p5.TWO_PI / fourierY.length; //Amount of time I move each frame of animatoon.
     //Should be 2pi a full cycle per frame / the number of fourier coefficents.
-    p5.time += dt;
+    time += dt;
 
     //This resets drawing when we complete it.
-    if (p5.time > p5.TWO_PI * 2) {
-      p5.time = 0;
+    if (time > p5.TWO_PI * 2) {
+      time = 0;
       path = [];
     }
   };

@@ -1,4 +1,4 @@
-import { dft } from "./fourier.js";
+import { dft, realFFT } from "./fourier.js";
 import { epiCycles } from "./epicycles.js";
 
 export let userSketch = function (p5) {
