@@ -1,6 +1,7 @@
 import { dft, realFFT } from "./fourier.js";
-import { logoDrawing } from "./codingtrain.js";
+import { logoDrawing } from "./testpaths/codingtrain2.js";
 import { epiCycles } from "./epicycles.js";
+import { points } from "./main.js ";
 
 export let logoSketch = function (p5) {
   var x = [];
@@ -10,23 +11,28 @@ export let logoSketch = function (p5) {
   let time = 0;
   let path = [];
 
+  var pathSketch = points;
+
   p5.setup = function () {
     p5.createCanvas(window.innerWidth, window.innerHeight);
     const skip = 12; //As we have too many values can skip some points.
     //Push path into x and y arrays.
-    for (let i = 0; i < logoDrawing.length; i += skip) {
-      x.push(logoDrawing[i].x);
-      y.push(logoDrawing[i].y);
+    for (let i = 0; i < pathSketch.length; i += skip) {
+      x.push(pathSketch[i].x);
+      y.push(pathSketch[i].y);
     }
-    //Get foureir transfrom.
-    let sclae = 1;
-    fourierX = dft(p5, x, scale);
-    fourierY = dft(p5, y, scale.);
+    //TODO: Add scale for users to dictate how many epicycles.
+    const scale = 1; //A number in the interval (0, 1].
+    const minAmplitude = 0.01;
+
+    fourierX = realFFT(x).filter((f) => f.amp > minAmplitude);
+    fourierY = realFFT(y).filter((f) => f.amp > minAmplitude);
 
     //The cycles are being drawn in order of frequency. e.g. C0, C1, ... Where C1 has a frequency. Recall frequency is k and we are calulating Ck.
-    //Instead it would be better of teh poinst are sorted by magitued
-    //(a, b) any 2 arbitrary elments.
-    //POsitive value put one in fornt of other and negative.
+
+    fourierX = fourierX.slice(0, Math.floor(scale * fourierX.length));
+    fourierY = fourierY.slice(0, Math.floor(scale * fourierY.length));
+
     fourierX.sort((a, b) => b.amp - a.amp);
     fourierY.sort((a, b) => b.amp - a.amp);
   };
@@ -47,7 +53,7 @@ export let logoSketch = function (p5) {
       p5.HALF_PI,
       fourierY
     ); //Vector y.
-    let v = p5.createVector(vx.x, vy.y); //As we wnat c coordinate from fourierX and y from fourierY.
+    let v = p5.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
     path.push(v);
     p5.line(vx.x, vx.y, v.x, v.y); //Draw the x and y of drawing.
     p5.line(vy.x, vy.y, v.x, v.y);

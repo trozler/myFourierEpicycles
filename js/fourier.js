@@ -7,7 +7,7 @@ import FFT from "../node_modules/fft.js/lib/fft.js";
  *
  * @param { Array<Number>} points Array of values of some wave. Must be a power of 2.
  */
-export function dft(p5, points, scale) {
+export function dft(p5, points) {
   const fourierCoef = [];
   const numPoints = points.length;
   for (let k = 0; k < numPoints; k++) {
@@ -18,7 +18,7 @@ export function dft(p5, points, scale) {
       re += points[n] * p5.cos(phi);
       im -= points[n] * p5.sin(phi);
     }
-    re /= numPoints; //This scalling is need for when we represent each point in the sample as sum of fourier constants.
+    re /= numPoints; //This scaling is need for when we represent each point in the sample as sum of fourier constants.
     im /= numPoints;
 
     let freq = k; //If we do k / numPoints we just scale teh frequency down for all complex numbers.
@@ -31,9 +31,7 @@ export function dft(p5, points, scale) {
 
 /**
  * @function realFFT Input array of form [x1, x2, ...], output fourier coeff.
- * Note, we dont use this as teh fourier coefficnets requier a closed path. Altough faster, it makes the drawings ugly.
- * This uses the cooley turkey implmentation.
- *
+ * This is the cooley turkey implmentation.
  * @param { Array<Number>} points Array of values of some wave. Must be a power of 2.
  */
 export function realFFT(points) {
@@ -53,12 +51,11 @@ export function realFFT(points) {
     }
   }
 
-  //numPoints = points.length;
+  numPoints = points.length;
   const fft = new FFT(points.length);
-  const formatedPoints = fft.createComplexArray();
-  fft.toComplexArray(points, formatedPoints);
   const out = fft.createComplexArray();
-  fft.transform(out, formatedPoints);
+  fft.realTransform(out, points);
+  fft.completeSpectrum(out);
 
   const fftData = [];
   // We only have to read the first half of this because of symmetry things.

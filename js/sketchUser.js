@@ -31,19 +31,25 @@ export let userSketch = function (p5) {
       x.push(drawing[i].x);
       y.push(drawing[i].y);
     }
+    //TODO: Add sclae for users to dictate how many epicycles.
+    const scale = 1; //A number in the interval (0, 1].
+
     fourierX = dft(p5, x);
     fourierY = dft(p5, y);
+
+    fourierX = fourierX.slice(0, Math.floor(scale * fourierX.length));
+    fourierY = fourierY.slice(0, Math.floor(scale * fourierY.length));
 
     fourierX.sort((a, b) => b.amp - a.amp);
     fourierY.sort((a, b) => b.amp - a.amp);
   };
 
   p5.setup = function () {
-    p5.createCanvas(800, 600);
+    p5.createCanvas(window.innerWidth, window.innerHeight);
   };
 
   p5.draw = function () {
-    p5.background(0);
+    p5.background(169, 188, 208);
 
     if (state == USER) {
       //If drawing need to record the points relative to window. i.e. center.

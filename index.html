@@ -4,16 +4,39 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>fourier</title>
+    <title>
+      myFourierEpicycles cycles. you give me an image I give you epicycles.
+    </title>
+
+    <link
+      rel="stylesheet"
+      href="./node_modules/dropzone/dist/min/dropzone.min.css"
+    />
     <link rel="stylesheet" href="./css/style.css" />
-    <script defer src="/node_modules/p5/lib/p5.min.js"></script>
+    <script defer src="./js/imagetracer_v1.2.6_trozler.js"></script>
+    <script
+      defer
+      src="./node_modules/dropzone/dist/min/dropzone.min.js"
+    ></script>
+    <script defer src="./node_modules/p5/lib/p5.min.js"></script>
     <script defer type="module" src="./js/main.js"></script>
   </head>
   <body>
-    <div id="c1"></div>
+    <div>
+      <form action="/target" class="dropzone" id="my-dropzone">
+        <div class="dz-message needsclick">
+          <span class="note needsclick">
+            Upload jpeg, png, svg or gif files.
+          </span>
+        </div>
+      </form>
+    </div>
+    <img id="temp1" src="" alt="">
+    <!-- <div id="c1"></div>
     <br />
     <div id="c2"></div>
     <br />
-    <div id="c3"></div>
+    <div id="c3"></div> -->
+    <canvas id="pointscanvas" width="400" height="400">;
   </body>
 </html>
