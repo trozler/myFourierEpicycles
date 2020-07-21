@@ -62,3 +62,7 @@ body {
 *:after {
   box-sizing: border-box;
 }
+
+#pointscanvas {
+  background-size: 200px 200px;
+}

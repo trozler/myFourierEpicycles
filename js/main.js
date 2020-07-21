@@ -1,10 +1,9 @@
 // import { userSketch } from "./sketchUser.js";
 // import { logoSketch } from "./sketchLogo.js";
-import { pathfinderImage } from "./findPath.js";
+import { pathfinderImage, pathfinderSVG } from "./findPath.js";
 import { dft, realFFT } from "./fourier.js";
 import { logoDrawing } from "./testpaths/codingtrain2.js";
 import { epiCycles } from "./epicycles.js";
-import { mePoints } from "./testpaths/brain.js";
 
 //Upload png here.
 Dropzone.options.myDropzone = {
@@ -21,20 +20,30 @@ Dropzone.options.myDropzone = {
       const reader = new FileReader();
       reader.addEventListener(
         "load",
-        function () {
-          // convert image file to base64 string
-          preview.title = file.name;
-          preview.src = reader.result;
+        function (e) {
           if (file.type !== "image/svg+xml") {
+            // convert uploaded image file to base64 string
+            preview.title = file.name;
+            //set source to image.
+            preview.src = reader.result;
+            //Finally make call to main flow depending on image uploaded.
             mainPathFinder(preview, false);
           } else {
-            mainPathFinder(preview, true);
+            var svgData = e.target.result;
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(svgData, "image/svg+xml");
+            var pathTags = doc.getElementsByTagName("path");
+            mainPathFinder(pathTags, true);
           }
         },
         false
       );
       if (file) {
-        reader.readAsDataURL(file);
+        if (file.type !== "image/svg+xml") {
+          reader.readAsDataURL(file);
+        } else {
+          reader.readAsText(file);
+        }
       }
     });
 
@@ -44,12 +53,14 @@ Dropzone.options.myDropzone = {
   },
 };
 
+const n_points = 1000;
+
 function mainPathFinder(image, svgBool) {
   if (svgBool) {
-    points = pathfinderSVG(image.src);
-    console.log(points);
+    var arr = pathfinderSVG(image, n_points);
+    myhandler(arr);
   } else {
-    pathfinderImage(image.src, myhandler);
+    pathfinderImage(image.src, myhandler, n_points);
   }
 }
 
@@ -62,19 +73,18 @@ function myhandler(arr) {
     let time = 0;
     let path = [];
 
-    //var pathSketch = arr;
-    var pathSketch = mePoints;
+    var pathSketch = arr;
 
     p5.setup = function () {
       p5.createCanvas(window.innerWidth, window.innerHeight);
-      const skip = 12; //As we have too many values can skip some points.
+      const skip = 2; //As we have too many values can skip some points.
       //Push path into x and y arrays.
       for (let i = 0; i < pathSketch.length; i += skip) {
         x.push(pathSketch[i].x);
         y.push(pathSketch[i].y);
       }
       //TODO: Add scale for users to dictate how many epicycles.
-      const scale = 1; //A number in the interval (0, 1].
+      const scale = 0.9; //A number in the interval (0, 1].
       const minAmplitude = 0.01;
 
       fourierX = dft(p5, x).filter((f) => f.amp > minAmplitude);
@@ -92,16 +102,14 @@ function myhandler(arr) {
     //Draws pictuer.
     p5.draw = function () {
       p5.background(47, 72, 88);
-      //47, 72, 88
-      //48, 76, 137
 
       //Create the 2 epicycle generaters.
-      let vx = epiCycles(p5, time, p5.width / 2 - 100, 100, 0, fourierX); //Vector x
+      let vx = epiCycles(p5, time, p5.width / 2 - 230, 100, 0, fourierX); //Vector x
       let vy = epiCycles(
         p5,
         time,
         200,
-        p5.height / 2 - 100,
+        p5.height / 2 - 230,
         p5.HALF_PI,
         fourierY
       ); //Vector y.
@@ -160,7 +168,7 @@ function myhandler(arr) {
         x.push(drawing[i].x);
         y.push(drawing[i].y);
       }
-      //TODO: Add sclae for users to dictate how many epicycles.
+      //TODO: Add scale for users to dictate how many epicycles.
       const scale = 1; //A number in the interval (0, 1].
 
       fourierX = dft(p5, x);

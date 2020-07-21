@@ -9,10 +9,12 @@ function htmlToElements(html) {
 }
 
 /**
- * @param {String} image. Image can be .png, .jpeg
- * @return {Array<Number>}
+ * @param {String} imageurl. Image can be .png, .jpeg
+ * @param {boolean} draw. True if you want the points dsiplayed.
+ * @param {Number} n_points.
+ * @return {Array<SVGPointList>} Points array, where arr[k].x and arr[k].y access the x and y coordinates of the kth sampled point.
  */
-export function pathfinderImage(imageurl, cback) {
+export function pathfinderImage(imageurl, cback, n_points) {
   // This will load an image, trace it when loaded, and execute callback on the tracedata
   ImageTracer.imageToTracedata(
     imageurl,
@@ -21,47 +23,62 @@ export function pathfinderImage(imageurl, cback) {
 
       let htmlsvg = htmlToElements(svgstr);
 
-      let canvas = document.getElementById("pointscanvas");
-      let canvasWidth = canvas.width;
-      let canvasHeight = canvas.height;
-      let ctx = canvas.getContext("2d");
+      // let canvas = document.getElementById("pointscanvas");
+      // let canvasWidth = canvas.width;
+      // let canvasHeight = canvas.height;
+      // let ctx = canvas.getContext("2d");
 
       let arr = [];
       let path = htmlsvg;
-      for (let i = 0, n_points = 100; i < n_points; i++) {
+      for (let i = 0; i < n_points; i++) {
         let point = path.getPointAtLength(
           (i / n_points) * path.getTotalLength()
         );
         arr.push(point);
-        ctx.fillRect(point.x, point.y, 2, 2);
+        // ctx.fillRect(point.x, point.y, 2, 2);
       }
-      console.log(arr);
+      //console.log(arr);
       cback(arr);
     },
     "grayscale"
   );
 }
 
-//TODO: No back end needed can just use stream.
 /**
- * @param {String} svg.
- * @return {Array<Number>}.
+ * @param {String} image. Is an svg.
+ * @param {boolean} draw.
+ * @return {Array<SVGPointList>}.
  */
-export function pathfinderSVG(image) {
-  //Will have to make call to backe end, to use node file system to open and return file.
+export function pathfinderSVG(pathTags, n_points) {
+  //TODO: Allow set default width and heigth.
+  //Build new svg with singel path.
+  var svgstr = "<svg " + 'version="1.1" xmlns="http://www.w3.org/2000/svg" >';
+
+  let pathstring = pathTags[0].outerHTML;
+  svgstr +=
+    '<path d="' + pathstring.split('d="')[1].replace("/>", "").replace('"', "");
+  for (let k = 1; k < pathTags.length; k++) {
+    let pathstring = pathTags[k].outerHTML;
+    svgstr += pathstring.split('d="')[1].replace("/>", "").replace('"', "");
+  }
+  svgstr += '"' + " stroke='rgb(0,0,0)' fill='transparent' />";
+  svgstr += "</svg>";
 
   let htmlsvg = htmlToElements(svgstr);
 
-  let canvas = document.getElementById("pointscanvas");
-  let canvasWidth = canvas.width;
-  let canvasHeight = canvas.height;
-  let ctx = canvas.getContext("2d");
+  // let canvas = document.getElementById("pointscanvas");
+  // let canvasWidth = canvas.width;
+  // let canvasHeight = canvas.height;
+  // var ctx = canvas.getContext("2d");
 
+  //Find points
   let arr = [];
   let path = htmlsvg;
-  for (let i = 0, n_points = 1000; i < n_points; i++) {
+  for (let i = 0; i < n_points; i++) {
     let point = path.getPointAtLength((i / n_points) * path.getTotalLength());
     arr.push(point);
+
     // ctx.fillRect(point.x, point.y, 2, 2);
   }
+  return arr;
 }
