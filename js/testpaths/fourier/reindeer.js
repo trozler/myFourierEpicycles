@@ -1,3 +1,4 @@
+//This is the fourier coefficients path used to load the initial reindeer.
 export const reindeerX = [
   {
     re: 45.0790552059145,
