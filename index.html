@@ -19,9 +19,20 @@
       src="./node_modules/dropzone/dist/min/dropzone.min.js"
     ></script>
     <script defer src="./node_modules/p5/lib/p5.min.js"></script>
+    <!-- <script defer type="module" src="./js/baseEpi.js"></script> -->
     <script defer type="module" src="./js/main.js"></script>
   </head>
   <body>
+    <header>
+      myFourierEpicycles cycles.
+      <p>By Tony Rosler</p>
+    </header>
+    <br />
+
+    <div id="startup">
+      <!-- <canvas width="700" height="600"></canvas> -->
+    </div>
+
     <div>
       <form action="/target" class="dropzone" id="my-dropzone">
         <div class="dz-message needsclick">
@@ -31,12 +42,11 @@
         </div>
       </form>
     </div>
-    <img id="temp1" src="" alt="">
-    <!-- <div id="c1"></div>
+    <!-- <img id="temp1" src="" alt="" /> -->
+    <div id="upload-sketch"></div>
     <br />
-    <div id="c2"></div>
-    <br />
-    <div id="c3"></div> -->
-    <canvas id="pointscanvas" width="400" height="400">;
+    <div id="draw-yourself"></div>
+
+    <!-- <canvas id="pointscanvas" width="400" height="400"></canvas>; -->
   </body>
 </html>

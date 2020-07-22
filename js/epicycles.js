@@ -1,4 +1,16 @@
-export function epiCycles(p5, time, runningX, runningY, rotation, fourier) {
+export function epiCycles(
+  p5,
+  time,
+  runningX,
+  runningY,
+  rotation,
+  fourier,
+  flag
+) {
+  let color = "#2f4858";
+  if (flag) {
+    color = "#ffffff";
+  }
   for (let i = 0; i < fourier.length; i++) {
     //Retrieve fourier constant.
     let prevx = runningX;
@@ -9,10 +21,10 @@ export function epiCycles(p5, time, runningX, runningY, rotation, fourier) {
     runningX += radius * p5.cos(freq * time + phase + rotation);
     runningY += radius * p5.sin(freq * time + phase + rotation);
 
-    p5.stroke(255, 100);
+    p5.stroke(color);
     p5.noFill();
     p5.ellipse(prevx, prevy, radius * 2);
-    p5.stroke(255);
+    p5.stroke(color);
     p5.line(prevx, prevy, runningX, runningY);
   }
   return p5.createVector(runningX, runningY); //Returns the total of the sum. i.e. The coordinate to draw.

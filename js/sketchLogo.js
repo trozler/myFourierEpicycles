@@ -1,5 +1,5 @@
 import { dft, realFFT } from "./fourier.js";
-import { logoDrawing } from "./testpaths/codingtrain2.js";
+
 import { epiCycles } from "./epicycles.js";
 import { points } from "./main.js ";
 
