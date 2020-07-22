@@ -1,5 +1,5 @@
 import { epiCycles } from "./epicycles.js";
-import { reindeerX, reindeerY } from "./testpaths/reindeer.js";
+import { reindeerX, reindeerY } from "./testpaths/fourier/reindeer.js";
 
 let logoSketch = function (p5) {
   let fourierX = reindeerX;
