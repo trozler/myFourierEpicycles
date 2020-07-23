@@ -7,46 +7,172 @@
     <title>
       myFourierEpicycles cycles. you give me an image I give you epicycles.
     </title>
-
     <link
       rel="stylesheet"
       href="./node_modules/dropzone/dist/min/dropzone.min.css"
     />
     <link rel="stylesheet" href="./css/style.css" />
-    <script defer src="./js/imagetracer_v1.2.6_trozler.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+        },
+      };
+    </script>
+    <script defer src="./node_modules/mathjax/es5/tex-chtml.js"></script>
     <script
       defer
       src="./node_modules/dropzone/dist/min/dropzone.min.js"
     ></script>
     <script defer src="./node_modules/p5/lib/p5.min.js"></script>
     <!-- <script defer type="module" src="./js/baseEpi.js"></script> -->
+    <script defer src="./js/imagetracer_v1.2.6_trozler.js"></script>
     <script defer type="module" src="./js/main.js"></script>
   </head>
   <body>
     <header>
       myFourierEpicycles cycles.
-      <p>By Tony Rosler</p>
+      <p>By Tony Rosler.</p>
     </header>
-    <br />
+    <div id="startup"></div>
+    <h3>What is a fourier series?</h3>
+    <p>$$f(t) = \frac{1}{P}\sum_{n=-N}^N c_n \cdot e^{i2\pi t\frac{n}{P}}$$</p>
+    <p>
+      The fourier series of a function $\small f(t)$, is given by a sum of
+      <i>harmonic sinusoids</i> ($\small sin$ waves). In our case, $\small
+      e^{i2\pi t\frac{n}{P}}$ gives the family of harmonic sinusoids (expand
+      using euler's formula to see why). These functions are scaled by fourier
+      coefficients ($\small c_n$), at each frequency $\small n$. Each value of
+      $\small n$ is a natural numbers in the range ($\small [-N, N]$, the
+      spectrum of frequencies). Euler's formula has an intuitive geometric
+      interpritation, the argument goes something like this.
+    </p>
+    <p>
+      The polar form of complex number $\small z = x + iy = r(cos(t) + i sin(t))
+      = re^{i t}$, by euler's formula. If we increase $\small t$ (or time) by 1
+      unit, the new complex number is equivilent to walking around a circle by 1
+      unit. The circle will have radius $r$, be centred about the origin, start
+      at (phase) $\small z=1 + 0i = 1$. So when $\small t=2\pi k$ ($\small k=0,
+      1, ...$), we have walked all the way around the circle and are at $z=1$.
+      Hence complex numbers in polar form are cyclical. Complex numbers are also
+      nice to use as they thought of as
+      <a href="https://en.wikipedia.org/wiki/Complex_number">vectors.</a>
+      <br />
+      Hopefully at this point, you have some intuition of why revolving circles
+      are being used to represnet arbitrary functions.
+    </p>
+    <div id="wave-circle-bridge"></div>
 
-    <div id="startup">
-      <!-- <canvas width="700" height="600"></canvas> -->
-    </div>
+    <h3>What do all those symbols mean?</h3>
+    <ul>
+      <li>
+        $\small f(t)$ maps real values to complex values. The domain in often
+        thought of as time and the range a coordinate at time 1. e.g. $\small
+        f(1)$ returns the value of the function at $\small t=1$.
+      </li>
+      <li>
+        $\small c_n$ the fourier coefficient, is a complex number which encodes
+        the amplitude(radius) and phase (initial position), of a vector on a
+        circle of radius equivilent to length.
+      </li>
+      <li>
+        $e^{i2\pi t\frac{n}{P}}$, is a complex function which can be
+        interperated as a revolving vector, whose frequency is given by $\small
+        \frac{n}{P}$. i.e. Every $1$ unit of time the vector has done
+        $\frac{n}{P}$ full rotations.
+      </li>
+      <li>
+        $\small \sum_{n=-N}^N$, means that we are decomposing our arbitrary
+        function $\small f(t)$ into harmonic sinusoids with frequencies in the
+        range $\small [-N, N]$.
+      </li>
+      <li>
+        $P$, is the period of the function, i.e. the number of sample points or
+        time considered. e.g $\small 2N$ in the equation above.
+      </li>
+    </ul>
+
+    <h3>Draw your own below!</h3>
+    <div id="draw-yourself"></div>
+    <h3>What is the fourier transform?</h3>
+    <p>$$ c_n = \sum_{n=-N}^N f(x) \cdot e^{-i\frac{2\pi nx}{P}}$$</p>
+    <p>
+      The discrete fourier transfrom is used to calculate the fourier
+      coefficents ($\small c_n$) of a function. These coefficents are then used
+      to express the function as weighted sum of harmonic sinusoids of differnet
+      frquencies, phases and amplitudes. That's it.
+      <br />
+      <br />
+      Anyways this site leaves the maths there (see the end of the page for more
+      resources), and instead gives users the oppertuntiy to upload and draw
+      their own pretty epicycle drawings.
+    </p>
+
+    <h3>
+      Upload an image and see its epicycles.
+      <br />
+      <span style="font-size: 85%;">For clearest drawings use svg files.</span>
+    </h3>
 
     <div>
       <form action="/target" class="dropzone" id="my-dropzone">
         <div class="dz-message needsclick">
           <span class="note needsclick">
-            Upload jpeg, png, svg or gif files.
+            Upload jpeg, png or svg files.
           </span>
         </div>
       </form>
     </div>
-    <!-- <img id="temp1" src="" alt="" /> -->
-    <div id="upload-sketch"></div>
-    <br />
-    <div id="draw-yourself"></div>
+    <canvas id="placeholder" width="700" height="600"></canvas>
 
-    <!-- <canvas id="pointscanvas" width="400" height="400"></canvas>; -->
+    <div id="upload-sketch"></div>
+
+    <h4>Understanding the fourier transform</h4>
+    <p>
+      For those curious, these resources are good starting points in
+      understanding the fourier transform and the drawing of epicycles. I
+      recommend using the resources in the order presented.
+    </p>
+    <p>
+      <a href="https://www.youtube.com/watch?v=spUNpyF58BY" target="_blank"
+        >3Blue1Brown</a
+      >
+      great, like really great explination.
+    </p>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Fourier_series" target="_blank"
+        >Wikepedia - Fourier Series</a
+      >
+      well written and covers the math decently well.
+    </p>
+    <p>
+      <a
+        href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform"
+        target="_blank"
+        >Wikepedia - Fourier Transform</a
+      >
+      same as above.
+    </p>
+    <p>
+      <a href="http://www.jezzamon.com/fourier/index.html" target="_blank"
+        >'An interactive introduction to the fourier transform'</a
+      >
+      - Great visuals helped me build some intution behind the animations and
+      the code is open source.
+    </p>
+    <p>
+      <a href="https://www.youtube.com/watch?v=MY4luNgGfms" target="_blank"
+        >The Coding Train</a
+      >
+      gives a basic guide on how you can create your own epicycles.
+    </p>
+
+    <p>
+      I have open sourced the code and you can find it on my
+      <a href="https://github.com/trozler" target="_blank">github!</a>
+    </p>
   </body>
 </html>

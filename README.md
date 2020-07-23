@@ -14,13 +14,12 @@ In order to find the arbitrary path of any image type in a efficent way, I creat
 ### Important notes
 
 - For **most clear drawings** upload **svg** images with **closed** paths.
-- I have had to alter the source code of almost every dependecy, as such the node_modules folder is included in repository.
 
 ### How to install
 
 - `git clone https://github.com/trozler/myFourierEpicycles.git`
 
-### Understanding Fourier Transfrom
+### Understanding the Fourier Transfrom
 
 For those curious, these resources are good starting points in understanding the fourier transform and the drawing of epicycles.
 
