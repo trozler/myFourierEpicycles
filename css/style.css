@@ -1,20 +1,21 @@
 body {
   margin: auto;
-  font-family: Roboto, "Open Sans", sans-serif;
-  font-size: 1.4rem;
-  font-weight: 300;
-  line-height: 1.4rem;
+  /* font-family: Roboto, "Open Sans", sans-serif; */
+
+  /* font-weight: 300; */
+  line-height: 1.7rem;
   color: rgba(47, 72, 88);
 }
 
 header {
   position: relative;
   text-align: center;
-  background-color: rgba(47, 72, 88);
+  background-color: #2f4858;
   padding-top: 60px;
   padding-bottom: 60px;
   color: white;
   line-height: 2rem;
+  font-size: 1.4rem;
 }
 
 header h1 {
@@ -31,12 +32,28 @@ header p {
   font-size: 85%;
 }
 
-#c1 {
+h4,
+h3,
+p {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  /* font-size: 1.2rem; */
+}
+
+h3,
+h4 {
+  color: #ef798a;
   text-align: center;
 }
 
-#c2 {
-  text-align: center;
+a,
+a:visited {
+  color: #ef798a;
+}
+a:hover {
+  color: #e91e63;
 }
 
 @media (max-width: 400px) {
