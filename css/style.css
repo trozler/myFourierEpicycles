@@ -41,6 +41,11 @@ p {
   margin-top: 25px;
   /* font-size: 1.2rem; */
 }
+li {
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 h3,
 h4 {
