@@ -1,19 +1,19 @@
 ## myFourierEpicycles - you give me an image I give you its epicycles.
 
-![]()
+![](./promo/promo_raw.gif)
 
 This is the code for a website I'm creating myFourierEpicyles.com. The site has the following functionality:
 
-- Upload an image and find the its fourier epicycles.
+- Upload an image and find its fourier epicycles.
 - Draw in an image and find its fourier epicycles.
 
-Something which makes this project differnet than other fourier epicycles websites, is that it allows users to upload any image of a variaty of forms (png, jpeg, svg, gif) and then.
+Something which makes this project different than other fourier epicycles websites, is that it allows users to upload any image of a variaty of forms (png, jpeg, svg, gif) and then see its epicycles.
 
-In order to find the arbitrary path of any image type in a efficent way, I created a new api which can be found [here](https://github.com/trozler/ImageToPoints).
+### Note on image selction:
 
-### Important notes
+For cleanest drawing use **closed path, medium sized svg's**. Currently the jpeg and png options work, but there is some ugly noise created during conversion. I'm working on making this conversion as lossless as possible.
 
-- For **most clear drawings** upload **svg** images with **closed** paths.
+In order to find the arbitrary path of any image type in a efficent way, I made use of a fork of an api I created. This can be found [here](https://github.com/trozler/ImageToPoints).
 
 ### How to install
 
@@ -23,7 +23,10 @@ In order to find the arbitrary path of any image type in a efficent way, I creat
 
 For those curious, these resources are good starting points in understanding the fourier transform and the drawing of epicycles.
 
-3Blue1Brown (amazing explination):
+3Blue1Brown fourier series:
+https://www.youtube.com/watch?v=r6sGWTCMz2k
+
+3Blue1Brown fourier transform:
 https://www.youtube.com/watch?v=spUNpyF58BY
 
 More great visusals:

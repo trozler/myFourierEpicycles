@@ -28,7 +28,7 @@
       src="./node_modules/dropzone/dist/min/dropzone.min.js"
     ></script>
     <script defer src="./node_modules/p5/lib/p5.min.js"></script>
-    <!-- <script defer type="module" src="./js/baseEpi.js"></script> -->
+    <script defer type="module" src="./js/baseEpi.js"></script>
     <script defer src="./js/imagetracer_v1.2.6_trozler.js"></script>
     <script defer type="module" src="./js/main.js"></script>
   </head>
@@ -38,17 +38,39 @@
       <p>By Tony Rosler.</p>
     </header>
     <div id="startup"></div>
+    <h3>
+      Upload an image and see its epicycles.
+      <br />
+      <span style="font-size: 85%;"
+        >For clearest drawings use closed path images in svg form.</span
+      >
+    </h3>
+
+    <div>
+      <form action="/target" class="dropzone" id="my-dropzone">
+        <div class="dz-message needsclick">
+          <span class="note needsclick">
+            Upload jpeg, png or svg files.
+          </span>
+        </div>
+      </form>
+    </div>
+    <canvas id="placeholder" width="700" height="600"></canvas>
+
+    <div id="upload-sketch"></div>
     <h3>What is a fourier series?</h3>
     <p>$$f(t) = \frac{1}{P}\sum_{n=-N}^N c_n \cdot e^{i2\pi t\frac{n}{P}}$$</p>
     <p>
-      The fourier series of a function $\small f(t)$, is given by a sum of
+      The fourier series (or inverse fourier transform) of a function $\small
+      f(t)$, is given by a sum of
       <i>harmonic sinusoids</i> ($\small sin$ waves). In our case, $\small
       e^{i2\pi t\frac{n}{P}}$ gives the family of harmonic sinusoids (expand
       using euler's formula to see why). These functions are scaled by fourier
-      coefficients ($\small c_n$), at each frequency $\small n$. Each value of
-      $\small n$ is a natural numbers in the range ($\small [-N, N]$, the
-      spectrum of frequencies). Euler's formula has an intuitive geometric
-      interpritation, the argument goes something like this.
+      coefficients ($\small c_n$), where $\small n$ is the frquency of the wave.
+      Each value of $\small n$ is a natural numbers in the range ($\small [-N,
+      N]$, the spectrum of frequencies). However, where do we get revolving
+      epicycles from? The answer lies in the intuitive geometric interpritation
+      of complex numbers in polar form. The argument goes something like this.
     </p>
     <p>
       The polar form of complex number $\small z = x + iy = r(cos(t) + i sin(t))
@@ -59,14 +81,16 @@
       1, ...$), we have walked all the way around the circle and are at $z=1$.
       Hence complex numbers in polar form are cyclical. Complex numbers are also
       nice to use as they thought of as
-      <a href="https://en.wikipedia.org/wiki/Complex_number">vectors.</a>
+      <a href="https://en.wikipedia.org/wiki/Complex_number" target="_blank"
+        >vectors.</a
+      >
       <br />
       Hopefully at this point, you have some intuition of why revolving circles
-      are being used to represnet arbitrary functions.
+      are being used to represent arbitrary functions.
     </p>
     <div id="wave-circle-bridge"></div>
 
-    <h3>What do all those symbols mean?</h3>
+    <h3>What do those symbols mean?</h3>
     <ul>
       <li>
         $\small f(t)$ maps real values to complex values. The domain in often
@@ -111,25 +135,6 @@
       their own pretty epicycle drawings.
     </p>
 
-    <h3>
-      Upload an image and see its epicycles.
-      <br />
-      <span style="font-size: 85%;">For clearest drawings use svg files.</span>
-    </h3>
-
-    <div>
-      <form action="/target" class="dropzone" id="my-dropzone">
-        <div class="dz-message needsclick">
-          <span class="note needsclick">
-            Upload jpeg, png or svg files.
-          </span>
-        </div>
-      </form>
-    </div>
-    <canvas id="placeholder" width="700" height="600"></canvas>
-
-    <div id="upload-sketch"></div>
-
     <h4>Understanding the fourier transform</h4>
     <p>
       For those curious, these resources are good starting points in
@@ -137,10 +142,16 @@
       recommend using the resources in the order presented.
     </p>
     <p>
-      <a href="https://www.youtube.com/watch?v=spUNpyF58BY" target="_blank"
-        >3Blue1Brown</a
+      <a href="https://www.youtube.com/watch?v=r6sGWTCMz2k" target="_blank"
+        >3Blue1Brown - fourier series</a
       >
       great, like really great explination.
+    </p>
+    <p>
+      <a href="https://www.youtube.com/watch?v=spUNpyF58BY" target="_blank"
+        >3Blue1Brown - fourier transform</a
+      >
+      he is still great.
     </p>
     <p>
       <a href="https://en.wikipedia.org/wiki/Fourier_series" target="_blank"
@@ -154,14 +165,14 @@
         target="_blank"
         >Wikepedia - Fourier Transform</a
       >
-      same as above.
+      ditto.
     </p>
     <p>
       <a href="http://www.jezzamon.com/fourier/index.html" target="_blank"
         >'An interactive introduction to the fourier transform'</a
       >
-      - Great visuals helped me build some intution behind the animations and
-      the code is open source.
+      - Great visuals helped me build intuition and get started. Code is open
+      source!
     </p>
     <p>
       <a href="https://www.youtube.com/watch?v=MY4luNgGfms" target="_blank"
