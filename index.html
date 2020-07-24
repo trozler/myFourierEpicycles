@@ -58,32 +58,57 @@
     <canvas id="placeholder" width="700" height="600"></canvas>
 
     <div id="upload-sketch"></div>
+    <h3>Draw your own below!</h3>
+    <div id="draw-yourself"></div>
     <h3>What is a fourier series?</h3>
-    <p>$$f(t) = \frac{1}{P}\sum_{n=-N}^N c_n \cdot e^{i2\pi t\frac{n}{P}}$$</p>
     <p>
-      The fourier series (or inverse fourier transform) of a function $\small
-      f(t)$, is given by a sum of
-      <i>harmonic sinusoids</i> ($\small sin$ waves). In our case, $\small
-      e^{i2\pi t\frac{n}{P}}$ gives the family of harmonic sinusoids (expand
-      using euler's formula to see why). These functions are scaled by fourier
-      coefficients ($\small c_n$), where $\small n$ is the frquency of the wave.
-      Each value of $\small n$ is a natural numbers in the range ($\small [-N,
-      N]$, the spectrum of frequencies). However, where do we get revolving
-      epicycles from? The answer lies in the intuitive geometric interpritation
-      of complex numbers in polar form. The argument goes something like this.
+      $$f(t) = \frac{1}{P}(c_{-N} \cdot e^{i2\pi t\frac{-N}{P}}) + ... +
+      \frac{1}{P}(c_1 \cdot e^{i2\pi t\frac{1}{P}}) + ... + \frac{1}{P}(c_N
+      \cdot e^{i2\pi t\frac{N}{P}}) = \frac{1}{P}\sum_{n=-N}^N c_n \cdot
+      e^{i2\pi t\frac{n}{P}}$$
     </p>
     <p>
-      The polar form of complex number $\small z = x + iy = r(cos(t) + i sin(t))
-      = re^{i t}$, by euler's formula. If we increase $\small t$ (or time) by 1
-      unit, the new complex number is equivilent to walking around a circle by 1
-      unit. The circle will have radius $r$, be centred about the origin, start
-      at (phase) $\small z=1 + 0i = 1$. So when $\small t=2\pi k$ ($\small k=0,
-      1, ...$), we have walked all the way around the circle and are at $z=1$.
-      Hence complex numbers in polar form are cyclical. Complex numbers are also
-      nice to use as they thought of as
+      The fourier series (or inverse fourier transform) of a function $\small
+      f(t)$, is given by a <b>sum</b> of
+      <i>complex harmonic sinusoids</i> ($\small sine$ and $\small cosine$ waves
+      in the complex plane). In our case, $\small e^{i2\pi t\frac{n}{P}}$ gives
+      the family of complex harmonic sinusoids (expand using
+      <a href="https://en.wikipedia.org/wiki/Euler%27s_formula" target="_blank"
+        >euler's formula</a
+      >
+      to see why). These functions are scaled by fourier coefficients ($\small
+      c_n$), where $\small n$ can be interperated as the frquency of the $nth$
+      sinusoidal wave in the sum. However, where do we get revolving epicycles
+      from? The answer comes from complex numbers in polar form, having an
+      intuitive geometric interpritation. The argument goes something like this.
+    </p>
+    <p>
+      Firstly, complex numbers thought of as
       <a href="https://en.wikipedia.org/wiki/Complex_number" target="_blank"
         >vectors.</a
+      >, as the real and imaginary components give the "number", both magnitude
+      and direction. Secondly, every complex number in
+      <a
+        href="https://en.wikipedia.org/wiki/Polar_coordinate_system#Complex_numbers"
+        target="_blank"
+        >polar form</a
       >
+      lies on a circle by defintion. We also observee that complex numbers in
+      polar form can be neatly represented by euler's formula. For example:
+      $\small z = x + iy = r(cos(t) + i sin(t)) = re^{i t}$. Now if we increase
+      $\small t$ (or time) by 1 unit, the new complex number is equivilent to
+      walking around a circle by 1 unit. The specific circle in question will
+      have radius $r$, be centred about the origin, have an initial
+      <a
+        href="https://math.stackexchange.com/questions/3141048/what-exactly-is-the-phase-of-a-complex-number/3141166"
+        target="_blank"
+        >phase</a
+      >
+      equal to $\small 1$. If we keep walking around the circle we will
+      eventually end up back where we started. Specifically, when $\small t=2\pi
+      k$ ($\small k=0, 1, ...$), we have walked all the way around the circle
+      and are at $z=1$ again.
+      <br />
       <br />
       Hopefully at this point, you have some intuition of why revolving circles
       are being used to represent arbitrary functions.
@@ -93,9 +118,10 @@
     <h3>What do those symbols mean?</h3>
     <ul>
       <li>
-        $\small f(t)$ maps real values to complex values. The domain in often
-        thought of as time and the range a coordinate at time 1. e.g. $\small
-        f(1)$ returns the value of the function at $\small t=1$.
+        $\small f(t)$ complex function of complex variable. In the discrete
+        fourier transform, the domain we will be a list of complex values, and
+        the first entry of the list can be interperated as the coordinate at
+        time $\small t=0$.
       </li>
       <li>
         $\small c_n$ the fourier coefficient, is a complex number which encodes
@@ -119,8 +145,6 @@
       </li>
     </ul>
 
-    <h3>Draw your own below!</h3>
-    <div id="draw-yourself"></div>
     <h3>What is the fourier transform?</h3>
     <p>$$ c_n = \sum_{n=-N}^N f(x) \cdot e^{-i\frac{2\pi nx}{P}}$$</p>
     <p>
@@ -155,7 +179,7 @@
     </p>
     <p>
       <a href="https://en.wikipedia.org/wiki/Fourier_series" target="_blank"
-        >Wikepedia - Fourier Series</a
+        >Wikepedia - dourier series</a
       >
       well written and covers the math decently well.
     </p>
@@ -163,7 +187,7 @@
       <a
         href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform"
         target="_blank"
-        >Wikepedia - Fourier Transform</a
+        >Wikepedia - fourier transform</a
       >
       ditto.
     </p>
@@ -171,7 +195,7 @@
       <a href="http://www.jezzamon.com/fourier/index.html" target="_blank"
         >'An interactive introduction to the fourier transform'</a
       >
-      - Great visuals helped me build intuition and get started. Code is open
+      - great visuals helped me build intuition and get started. Code is open
       source!
     </p>
     <p>
