@@ -28,7 +28,7 @@
       src="./node_modules/dropzone/dist/min/dropzone.min.js"
     ></script>
     <script defer src="./node_modules/p5/lib/p5.min.js"></script>
-    <script defer type="module" src="./js/baseEpi.js"></script>
+    <!-- <script defer type="module" src="./js/baseEpi.js"></script> -->
     <script defer src="./js/imagetracer_v1.2.6_trozler.js"></script>
     <script defer type="module" src="./js/main.js"></script>
   </head>
@@ -60,7 +60,7 @@
     <div id="upload-sketch"></div>
     <h3>Draw your own below!</h3>
     <div id="draw-yourself"></div>
-    <h3>What is a fourier series?</h3>
+    <h3>What is a fourier series? An intuitive argument.</h3>
     <p>
       $$f(t) = \frac{1}{P}(c_{-N} \cdot e^{i2\pi t\frac{-N}{P}}) + ... +
       \frac{1}{P}(c_1 \cdot e^{i2\pi t\frac{1}{P}}) + ... + \frac{1}{P}(c_N
@@ -78,14 +78,15 @@
       >
       to see why). These functions are scaled by fourier coefficients ($\small
       c_n$), where $\small n$ can be interperated as the frquency of the $nth$
-      sinusoidal wave in the sum. However, where do we get revolving epicycles
-      from? The answer comes from complex numbers in polar form, having an
-      intuitive geometric interpritation. The argument goes something like this.
+      sinusoidal wave in the sum. However, what is the intuition behind
+      revolving epicycles? The answer comes from complex numbers in polar form,
+      having an intuitive geometric interpritation. The argument goes something
+      like this:
     </p>
     <p>
-      Firstly, complex numbers thought of as
+      Firstly, complex numbers can bethought of as
       <a href="https://en.wikipedia.org/wiki/Complex_number" target="_blank"
-        >vectors.</a
+        >vectors</a
       >, as the real and imaginary components give the "number", both magnitude
       and direction. Secondly, every complex number in
       <a
@@ -108,6 +109,14 @@
       eventually end up back where we started. Specifically, when $\small t=2\pi
       k$ ($\small k=0, 1, ...$), we have walked all the way around the circle
       and are at $z=1$ again.
+      <br />
+      <br />
+      So therfore, since the fourier series expresses a function as a sum of
+      complex sinusoids (these are also functions remember), and the outputs of
+      these functions are entirely described by circles in the complex plane -
+      we can represent each complex sinusoid by a circle and a revolving vector.
+      Hence, we can represent a function as a sum of revolving circles and
+      vectors, connected tip to toe.
       <br />
       <br />
       Hopefully at this point, you have some intuition of why revolving circles
