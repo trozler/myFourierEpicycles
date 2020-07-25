@@ -266,72 +266,57 @@ let userSketch = function (p5) {
 userP5 = new p5(userSketch);
 
 let wave_circle_sketch = function (p5) {
-  var x = [];
-  let y = [];
-
-  let time = 0;
-  let path = [];
+  var speed = 0;
+  var strum = 1;
+  var centerX = 450;
+  var centerY = 215;
 
   p5.setup = function () {
-    let cnv = p5.createCanvas(500, 500);
+    let cnv = p5.createCanvas(600, 400);
     cnv.parent("wave-circle-bridge");
-    p5.frameRate(25);
-
-    const skip = 2; //As we have too many values can skip some points.
-    //Push path into x and y arrays.
-    for (let i = 0; i < pathSketch.length; i += skip) {
-      x.push(pathSketch[i].x);
-      y.push(pathSketch[i].y);
-    }
-
-    //TODO: USer tinkering,
-    //If circles touch outside area don't include. Use size of window.
-
-    fourierX = dft(p5, x).filter(
-      (f) => f.amp > minAmplitude && f.amp < maxAmplitude
-    );
-    fourierY = dft(p5, y).filter(
-      (f) => f.amp > minAmplitude && f.amp < maxAmplitude
-    );
-
-    //The cycles are being drawn in order of frequency. e.g. C0, C1, ... Where C1 has a frequency. Recall frequency is k and we are calulating Ck.
-
-    fourierX = fourierX.slice(0, Math.floor(scale * fourierX.length));
-    fourierY = fourierY.slice(0, Math.floor(scale * fourierY.length));
-
-    fourierX.sort((a, b) => b.amp - a.amp);
-    fourierY.sort((a, b) => b.amp - a.amp);
+    p5.frameRate(46);
   };
 
-  //Draws pictuer.
   p5.draw = function () {
-    p5.background(255, 255, 255);
+    p5.background(250);
 
-    let vx = epiCycles(p5, time, 300, 450, 0, fourierX, false); //Vector x
-    let vy = epiCycles(p5, time, 500, 200, p5.HALF_PI, fourierY, false); //Vector y.
-    let v = p5.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
-    path.push(v);
-    p5.line(vx.x, vx.y, v.x, v.y); //Draw the x and y of drawing.
-    p5.line(vy.x, vy.y, v.x, v.y);
-    p5.beginShape();
+    // sketchCircle();
+    // sin(frequency) * amplitude + center.
+    let y_revolve = p5.sin(p5.frameCount / 50) * 58 + centerY;
+    let x_revolve = p5.cos(p5.frameCount / 50) * 58 + centerX;
+
+    p5.beginShape(p5.POINTS);
+    p5.strokeWeight(10);
+    p5.stroke("#ef798a");
     p5.noFill();
-
-    //Draw all previouse points of drawing for every frame of animation.
-    for (let i = 0; i < path.length; i++) {
-      p5.vertex(path[i].x, path[i].y);
-    }
+    p5.vertex(x_revolve, y_revolve);
     p5.endShape();
 
-    const dt = p5.TWO_PI / fourierY.length; //Amount of time I move each frame of animatoon.
-    //Should be 2pi a full cycle per frame / the number of fourier coefficents.
-    time += dt;
+    //Draw circle
+    p5.strokeWeight(1);
+    p5.stroke(47, 72, 88);
+    p5.ellipse(centerX, centerY, 115);
+    p5.line(centerX, centerY, x_revolve, y_revolve);
 
-    //This resets drawing when we complete it.
-    if (time > p5.TWO_PI * 2) {
-      time = 0;
-      path = [];
+    // sketchWave();
+    p5.stroke(47, 72, 88);
+    p5.noFill();
+    p5.beginShape();
+
+    //vertex(0, height);
+    //x < 250 means we stop rendering wave at 250 pixels.
+    //So for every pixel up to this point we find the corresponding point.
+    for (let x = 0; x < 250; x++) {
+      let freq = speed + x * 0.05;
+      //Map -1 and 1 amplitudes to amplitudes in range 150px and 280px.
+      let y = p5.map(p5.sin(freq), -strum, strum, 150, 280);
+      p5.vertex(x, y);
     }
+    //Gives us line to circle.
+    p5.vertex(x_revolve, y_revolve);
+    p5.endShape();
+    speed += 0.02;
   };
 };
 
-//let wave_circlep5 = new p5(wave_circle_sketch);
+let wave_circlep5 = new p5(wave_circle_sketch);

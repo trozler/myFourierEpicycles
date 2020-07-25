@@ -69,7 +69,7 @@
     </p>
     <p>
       The fourier series (or inverse fourier transform) of a function $\small
-      f(t)$, is given by a <b>sum</b> of
+      f$, is given by a <b>sum</b> of
       <i>complex harmonic sinusoids</i> ($\small sine$ and $\small cosine$ waves
       in the complex plane). In our case, $\small e^{i2\pi t\frac{n}{P}}$ gives
       the family of complex harmonic sinusoids (expand using
@@ -87,7 +87,7 @@
       Firstly, complex numbers can bethought of as
       <a href="https://en.wikipedia.org/wiki/Complex_number" target="_blank"
         >vectors</a
-      >, as the real and imaginary components give the "number", both magnitude
+      >, as the real and imaginary components give the "numbers", both magnitude
       and direction. Secondly, every complex number in
       <a
         href="https://en.wikipedia.org/wiki/Polar_coordinate_system#Complex_numbers"
@@ -119,18 +119,19 @@
       vectors, connected tip to toe.
       <br />
       <br />
-      Hopefully at this point, you have some intuition of why revolving circles
-      are being used to represent arbitrary functions.
+      Hopefully at this point, you have some intuition, as to why revolving circles
+      can be used to represent waves.
     </p>
     <div id="wave-circle-bridge"></div>
 
     <h3>What do those symbols mean?</h3>
     <ul>
       <li>
-        $\small f(t)$ complex function of complex variable. In the discrete
-        fourier transform, the domain we will be a list of complex values, and
-        the first entry of the list can be interperated as the coordinate at
-        time $\small t=0$.
+        $\small f(t)$ complex function of complex variable. In the
+        <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform"
+          >discrete fourier transform</a
+        >, the domain will be a list of complex values, and the first entry of
+        the list can be interperated as the coordinate at time $\small t=0$.
       </li>
       <li>
         $\small c_n$ the fourier coefficient, is a complex number which encodes
@@ -145,7 +146,7 @@
       </li>
       <li>
         $\small \sum_{n=-N}^N$, means that we are decomposing our arbitrary
-        function $\small f(t)$ into harmonic sinusoids with frequencies in the
+        function $\small f(t)$ into a sum of harmonic sinusoids with frequencies in the
         range $\small [-N, N]$.
       </li>
       <li>
@@ -157,9 +158,9 @@
     <h3>What is the fourier transform?</h3>
     <p>$$ c_n = \sum_{n=-N}^N f(x) \cdot e^{-i\frac{2\pi nx}{P}}$$</p>
     <p>
-      The discrete fourier transfrom is used to calculate the fourier
-      coefficents ($\small c_n$) of a function. These coefficents are then used
-      to express the function as weighted sum of harmonic sinusoids of differnet
+      The fourier transfrom is used to calculate the fourier coefficents
+      ($\small c_n$) of a function. These coefficents are then used to express
+      the function as weighted sum of harmonic sinusoids of differnet
       frquencies, phases and amplitudes. That's it.
       <br />
       <br />
@@ -168,7 +169,7 @@
       their own pretty epicycle drawings.
     </p>
 
-    <h4>Understanding the fourier transform</h4>
+    <h3>Understanding the fourier transform</h4>
     <p>
       For those curious, these resources are good starting points in
       understanding the fourier transform and the drawing of epicycles. I
@@ -184,7 +185,7 @@
       <a href="https://www.youtube.com/watch?v=spUNpyF58BY" target="_blank"
         >3Blue1Brown - fourier transform</a
       >
-      he is still great.
+      also great.
     </p>
     <p>
       <a href="https://en.wikipedia.org/wiki/Fourier_series" target="_blank"
