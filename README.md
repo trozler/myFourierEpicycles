@@ -1,6 +1,11 @@
 ## myFourierEpicycles - you give me an image I give you its epicycles.
 
+![Fourier][2]![License][3]
+
 ![](./promo/promo_raw.gif)
+
+[2]: https://img.shields.io/badge/fourier-epicycles-blue
+[3]: https://img.shields.io/badge/license-MIT-orange
 
 This is the code for a website I'm creating myFourierEpicyles.com. The site has the following functionality:
 
