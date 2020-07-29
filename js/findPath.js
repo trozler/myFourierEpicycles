@@ -50,9 +50,12 @@ export function pathfinderImage(imageurl, cback, n_points) {
  * @return {Array<SVGPointList>}.
  */
 export function pathfinderSVG(pathTags, n_points) {
-  //TODO: Allow set default width and heigth.
-  //Build new svg with singel path.
-  var svgstr = "<svg " + 'version="1.1" xmlns="http://www.w3.org/2000/svg" >';
+  var svgstr =
+    "<svg " +
+    'width="350px" height="400px"' +
+    'viewBox="0 0 700 600"' +
+    'preserveAspectRatio="xMidYMid meet"' +
+    'version="1.1" xmlns="http://www.w3.org/2000/svg" >';
 
   let pathstring = pathTags[0].outerHTML;
   svgstr +=
