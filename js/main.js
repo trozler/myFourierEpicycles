@@ -33,8 +33,8 @@ Dropzone.options.myDropzone = {
             var svgData = e.target.result;
             var parser = new DOMParser();
             var doc = parser.parseFromString(svgData, "image/svg+xml");
-            var pathTags = doc.getElementsByTagName("path");
-            mainPathFinder(pathTags, true);
+            // var pathTags = doc.getElementsByTagName("path");
+            mainPathFinder(svgData, true);
           }
         },
         false
