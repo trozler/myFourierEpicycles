@@ -29,7 +29,7 @@
     ></script>
     <script defer src="./node_modules/p5/lib/p5.min.js"></script>
     <!-- <script defer type="module" src="./js/baseEpi.js"></script> -->
-    <script defer src="./js/imagetracer_v1.2.6_trozler.js"></script>
+    <script defer src="./js/imagetracer_v1.2.6.js"></script>
     <script defer type="module" src="./js/main.js"></script>
   </head>
   <body>
@@ -56,8 +56,8 @@
       </form>
     </div>
     <canvas id="placeholder" width="700" height="600"></canvas>
-    <div id="svgholder"></div>
-    <canvas id="pointscanvas" width="400" height="400"></canvas>
+    <!-- For drawing points for comparison. -->
+    <!-- <canvas id="pointscanvas" width="400" height="400"></canvas> -->
 
     <div id="upload-sketch"></div>
     <h3>Draw your own below!</h3>
@@ -121,7 +121,7 @@
       vectors. Connected them tip to toe (i.e. adding them together) to find the final drawing.
       <br />
       <br />
-      Hopefully at this point, you have some intuition, as to why revolving circles
+      Hopefully at this point, you have some mathematical intuition, as to why revolving circles
       can be used to represent waves.
     </p>
     <div id="wave-circle-bridge"></div>
@@ -130,7 +130,7 @@
     <ul>
       <li>
         $\small f(t)$ complex function of complex variable. In the
-        <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform"
+        <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform" target="_blank"
           >discrete fourier transform</a
         >, the domain will be a list of complex values, and the first entry of
         the list can be interperated as the coordinate at time $\small t=0$.
