@@ -14,28 +14,39 @@ function htmlToElements(html) {
  * @param {Number} n_points.
  * @return {Array<SVGPointList>} Points array, where arr[k].x and arr[k].y access the x and y coordinates of the kth sampled point.
  */
-export function pathfinderImage(imageurl, cback, n_points) {
+export function pathfinderImage(imageurl, cback, factor) {
   // This will load an image, trace it when loaded, and execute callback on the tracedata
   ImageTracer.imageToTracedata(
     imageurl,
     function (tracedata) {
+      /**@returns svg string*/
       let svgstr = ImageTracer.getsvgstring(tracedata, "grayscale");
-
-      let htmlsvg = htmlToElements(svgstr);
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(svgstr, "image/svg+xml");
+      var pathTags = doc.getElementsByTagName("path");
 
       // let canvas = document.getElementById("pointscanvas");
       // let canvasWidth = canvas.width;
       // let canvasHeight = canvas.height;
       // let ctx = canvas.getContext("2d");
 
+      //Find points
       let arr = [];
-      let path = htmlsvg;
-      for (let i = 0; i < n_points; i++) {
-        let point = path.getPointAtLength(
-          (i / n_points) * path.getTotalLength()
-        );
-        arr.push(point);
-        // ctx.fillRect(point.x, point.y, 2, 2);
+      for (let j = 0; j < pathTags.length; j++) {
+        //Find points
+        arr.push([]);
+        let path = pathTags[j];
+        let n_points = Math.floor(path.getTotalLength() / factor);
+
+        for (let i = 0; i < n_points; i++) {
+          let point = path.getPointAtLength(
+            (i / n_points) * path.getTotalLength()
+          );
+          arr[j].push(point);
+          if (draw) {
+            ctx.fillRect(point.x, point.y, 2, 2);
+          }
+        }
       }
       //console.log(arr);
       cback(arr);
@@ -45,19 +56,16 @@ export function pathfinderImage(imageurl, cback, n_points) {
 }
 
 /**
- * @param {String} image. Is an svg.
- * @param {boolean} draw.
+ * @param {String} pathTags. An HTMLCollection of path elements.
  * @return {Array<SVGPointList>}.
  */
-export function pathfinderSVG(svgstr, n_points) {
+export function pathfinderSVG(pathTags, factor) {
   // var svgstr =
   //   "<svg " +
   //   'width="350px" height="400px"' +
   //   'viewBox="0 0 700 600"' +
   //   'preserveAspectRatio="xMidYMid meet"' +
   //   'version="1.1" xmlns="http://www.w3.org/2000/svg" >';
-
-  // let pathstring = pathTags[0].outerHTML;
 
   // svgstr +=
   //   '<path d="' + pathstring.split('d="')[1].replace("/>", "").replace('"', "");
@@ -68,26 +76,32 @@ export function pathfinderSVG(svgstr, n_points) {
   // svgstr += '"' + " stroke='rgb(0,0,0)' fill='transparent' />";
   // svgstr += "</svg>";
 
-  svgstr = svgstr.slice(svgstr.indexOf("<svg"));
-  let container = document.getElementById("svgholder");
-  container.innerHTML = svgstr;
+  // svgstr = svgstr.slice(svgstr.indexOf("<svg"));
+  // let container = document.getElementById("svgholder");
+  // container.innerHTML = svgstr;
+  // let pathstring = pathTags[0].outerHTML;
 
-  let canvas = document.getElementById("pointscanvas");
-  let canvasWidth = canvas.width;
-  let canvasHeight = canvas.height;
-  var ctx = canvas.getContext("2d");
+  // let canvas = document.getElementById("pointscanvas");
+  // let canvasWidth = canvas.width;
+  // let canvasHeight = canvas.height;
+  // var ctx = canvas.getContext("2d");
 
-  let htmlsvg = htmlToElements(svgstr);
-
-  //Find points
+  // let htmlsvg = htmlToElements(svgstr);
   let arr = [];
-  let path = htmlsvg;
-  for (let i = 0; i < n_points; i++) {
-    let point = path.getPointAtLength((i / n_points) * path.getTotalLength());
-    arr.push(point);
+  for (let j = 0; j < pathTags.length; j++) {
+    //Find points
+    arr.push([]);
+    let path = pathTags[j];
+    let n_points = Math.floor(path.getTotalLength() / factor);
 
-    ctx.fillRect(point.x, point.y, 2, 2);
+    for (let i = 0; i < n_points; i++) {
+      let point = path.getPointAtLength((i / n_points) * path.getTotalLength());
+      arr[j].push(point);
+
+      // ctx.fillRect(point.x, point.y, 2, 2);
+    }
   }
 
+  //TODO: Change thsi will return array of arrays. As multiple fourier transforms.
   return arr;
 }
