@@ -126,8 +126,8 @@ function myhandler(arr) {
         allFourierX.push(fourierX);
         allFourierY.push(fourierY);
 
-        x = [];
-        y = [];
+        x.length = 0;
+        y.length = 0;
       }
     };
 
@@ -182,14 +182,14 @@ function myhandler(arr) {
         }
 
         localTime = 0;
-      }
 
-      //After we have drawn all paths and been around once, we reset and draw again.
-      if (time >= p5.TWO_PI * allFourierX.length * 2) {
-        time = 0;
-        currPath = [];
-        currSVGPath = 0;
-        localTime = 0;
+        //After we have drawn all paths and been around once, we reset and draw again.
+        if (time >= p5.TWO_PI * allFourierX.length * 2) {
+          time = 0;
+          currPath.length = 0;
+          currSVGPath = 0;
+          localTime = 0;
+        }
       }
     };
   };
