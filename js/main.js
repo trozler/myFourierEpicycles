@@ -84,7 +84,9 @@ function myhandler(arr) {
     let allFourierY = [];
 
     let time = 0;
-    let path = [];
+    let localTime = 0;
+    let currPath = [];
+    let currSVGPath = 0;
 
     p5.setup = function () {
       let cnv = p5.createCanvas(700, 600);
@@ -92,12 +94,11 @@ function myhandler(arr) {
       p5.frameRate(25);
 
       for (let subpath of arr) {
-        let pathSketch = subpath;
         const skip = 1;
         //Push path into x and y arrays.
-        for (let i = 0; i < pathSketch.length; i += skip) {
-          x.push(pathSketch[i].x);
-          y.push(pathSketch[i].y);
+        for (let i = 0; i < subpath.length; i += skip) {
+          x.push(subpath[i].x);
+          y.push(subpath[i].y);
         }
         //TODO: Add scale for users to dictate how many epicycles.
         const scale = 0.9; //A number in the interval (0, 1].
@@ -124,6 +125,9 @@ function myhandler(arr) {
 
         allFourierX.push(fourierX);
         allFourierY.push(fourierY);
+
+        x = [];
+        y = [];
       }
     };
 
@@ -131,43 +135,64 @@ function myhandler(arr) {
     p5.draw = function () {
       p5.background(255, 255, 255);
 
-      for (let p = 0; p < allFourierX.length; p++) {
-        let vx = epiCycles(p5, time, 300, 450, 0, allFourierX[p], false); //Vector x
-        let vy = epiCycles(
-          p5,
-          time,
-          500,
-          200,
-          p5.HALF_PI,
-          allFourierY[p],
-          false
-        ); //Vector y.
-        let v = p5.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
-        path.push(v);
-        p5.line(vx.x, vx.y, v.x, v.y); //Draw the x and y of drawing.
-        p5.line(vy.x, vy.y, v.x, v.y);
-        p5.beginShape();
-        p5.noFill();
+      let vx = epiCycles(
+        p5,
+        localTime,
+        300,
+        450,
+        0,
+        allFourierX[currSVGPath],
+        false
+      ); //Vector x
+      let vy = epiCycles(
+        p5,
+        localTime,
+        500,
+        200,
+        p5.HALF_PI,
+        allFourierY[currSVGPath],
+        false
+      ); //Vector y.
+      let v = p5.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
+      currPath.push(v);
+      p5.line(vx.x, vx.y, v.x, v.y); //Draw the x and y of drawing.
+      p5.line(vy.x, vy.y, v.x, v.y);
+      p5.beginShape();
+      p5.noFill();
 
-        //Draw all previouse points of drawing for every frame of animation.
-        for (let i = 0; i < path.length; i++) {
-          p5.vertex(path[i].x, path[i].y);
+      //Draw all previouse points of drawing for every frame of animation.
+      for (let i = 0; i < currPath.length; i++) {
+        p5.vertex(currPath[i].x, currPath[i].y);
+      }
+      p5.endShape();
+
+      const dt = p5.TWO_PI / allFourierY[currSVGPath].length; //Amount of time I move each frame of animatoon.
+      //Should be 2pi a full cycle per frame / the number of fourier coefficents.
+      localTime += dt;
+
+      if (localTime >= p5.TWO_PI) {
+        //Finsihed one svg path completly.
+        time += p5.TWO_PI;
+        //i.e. We have gone through all svg paths.
+        if (currSVGPath + 1 === allFourierX.length) {
+          //Set to first path, after we spin around twice.
+          currSVGPath = 0;
+        } else {
+          currSVGPath++;
         }
-        p5.endShape();
 
-        const dt = p5.TWO_PI / allFourierY[p].length; //Amount of time I move each frame of animatoon.
-        //Should be 2pi a full cycle per frame / the number of fourier coefficents.
-        time += dt;
+        localTime = 0;
+      }
 
-        //This resets drawing when we complete it.
-        if (time > p5.TWO_PI * 2) {
-          time = 0;
-          path = [];
-        }
+      //After we have drawn all paths and been around once, we reset and draw again.
+      if (time >= p5.TWO_PI * allFourierX.length * 2) {
+        time = 0;
+        currPath = [];
+        currSVGPath = 0;
+        localTime = 0;
       }
     };
   };
-
   logoP5 = new p5(customSketch);
 }
 

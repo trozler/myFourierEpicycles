@@ -18,8 +18,8 @@ export function epiCycles(
     let freq = fourier[i].freq;
     let radius = fourier[i].amp;
     let phase = fourier[i].phase;
-    runningX += radius * p5.cos(freq * time + phase + rotation);
-    runningY += radius * p5.sin(freq * time + phase + rotation);
+    runningX += radius * Math.cos(freq * time + phase + rotation);
+    runningY += radius * Math.sin(freq * time + phase + rotation);
 
     p5.stroke(color);
     p5.noFill();
