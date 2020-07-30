@@ -56,7 +56,7 @@ Dropzone.options.myDropzone = {
   },
 };
 
-const factor = 2;
+const factor = 5;
 
 function mainPathFinder(image, svgBool) {
   if (n_uploads > 0) {
@@ -94,7 +94,7 @@ function myhandler(arr) {
       p5.frameRate(25);
 
       for (let subpath of arr) {
-        const skip = 1;
+        const skip = 2;
         //Push path into x and y arrays.
         for (let i = 0; i < subpath.length; i += skip) {
           x.push(subpath[i].x);
