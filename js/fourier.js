@@ -1,10 +1,7 @@
 import FFT from "../node_modules/fft.js/lib/fft.js";
 
 /**
- * @function realFFT Input array of form [x1, x2, ...], output fourier coeff.
- * This FFT assumes that
- * This uses the cooley turkey implmentation.
- *
+ * @function dft Input array of form [x1, x2, ...], output fourier coeff.
  * @param { Array<Number>} points Array of values of some wave. Must be a power of 2.
  */
 export function dft(p5, points) {

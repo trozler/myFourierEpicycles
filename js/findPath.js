@@ -42,9 +42,8 @@ export function pathfinderImage(imageurl, cback, factor) {
         for (let i = 0; i < n_points; i++) {
           let point = path.getPointAtLength((i / n_points) * pathLength);
           arr[j].push(point);
-          if (draw) {
-            ctx.fillRect(point.x, point.y, 2, 2);
-          }
+
+          // ctx.fillRect(point.x, point.y, 2, 2);
         }
       }
       //console.log(arr);
@@ -97,7 +96,6 @@ export function pathfinderSVG(pathTags, factor) {
     for (let i = 0; i < n_points; i++) {
       let point = path.getPointAtLength((i / n_points) * pathLength);
       arr[j].push(point);
-
       // ctx.fillRect(point.x, point.y, 2, 2);
     }
   }
