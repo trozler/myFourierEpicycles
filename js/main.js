@@ -85,13 +85,13 @@ function myhandler(arr) {
 
     let time = 0;
     let localTime = 0;
-    let currPath = [];
+    let currPath = [[]];
     let currSVGPath = 0;
 
     p5.setup = function () {
       let cnv = p5.createCanvas(700, 600);
       cnv.parent("upload-sketch");
-      p5.frameRate(25);
+      p5.frameRate(20);
 
       for (let subpath of arr) {
         const skip = 2;
@@ -154,17 +154,20 @@ function myhandler(arr) {
         false
       ); //Vector y.
       let v = p5.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
-      currPath.push(v);
-      p5.line(vx.x, vx.y, v.x, v.y); //Draw the x and y of drawing.
-      p5.line(vy.x, vy.y, v.x, v.y);
-      p5.beginShape();
-      p5.noFill();
+      currPath[currSVGPath].push(v);
+      p5.line(vx.x, vx.y, v.x, v.y); //Draw the x coordinates of drawing.
+      p5.line(vy.x, vy.y, v.x, v.y); //Draw y coordinates of drawing.
 
-      //Draw all previouse points of drawing for every frame of animation.
-      for (let i = 0; i < currPath.length; i++) {
-        p5.vertex(currPath[i].x, currPath[i].y);
+      for (let mod = 0; mod < currPath.length; mod++) {
+        //When we redraw points. We need a break when we reach the end of an svg path.
+        p5.beginShape();
+        p5.noFill();
+        //Draw all previouse points of drawing for every frame of animation.
+        for (let i = 0; i < currPath[mod].length; i++) {
+          p5.vertex(currPath[mod][i].x, currPath[mod][i].y);
+        }
+        p5.endShape();
       }
-      p5.endShape();
 
       const dt = p5.TWO_PI / allFourierY[currSVGPath].length; //Amount of time I move each frame of animatoon.
       //Should be 2pi a full cycle per frame / the number of fourier coefficents.
@@ -173,20 +176,22 @@ function myhandler(arr) {
       if (localTime >= p5.TWO_PI) {
         //Finsihed one svg path completly.
         time += p5.TWO_PI;
-        //i.e. We have gone through all svg paths.
-        if (currSVGPath + 1 === allFourierX.length) {
-          //Set to first path, after we spin around twice.
-          currSVGPath = 0;
-        } else {
-          currSVGPath++;
-        }
-
+        // //i.e. We have gone through all svg paths.
+        // if (currSVGPath + 1 === allFourierX.length) {
+        //   //Set to first path, after we spin around twice.
+        //   currSVGPath = 0;
+        // } else {
+        //   currSVGPath++;
+        // }
         localTime = 0;
+        currSVGPath++;
+        currPath.push([]);
 
         //After we have drawn all paths and been around once, we reset and draw again.
-        if (time >= p5.TWO_PI * allFourierX.length * 2) {
+        if (time >= p5.TWO_PI * allFourierX.length) {
           time = 0;
           currPath.length = 0;
+          currPath.push([]);
           currSVGPath = 0;
           localTime = 0;
         }
