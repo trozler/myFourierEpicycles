@@ -36,7 +36,7 @@ export function pathfinderImage(imageurl, cback, factor) {
         //Find points
         arr.push([]);
         let path = pathTags[j];
-        let pathLength = pathLength;
+        let pathLength = path.getTotalLength();
         let n_points = Math.floor(pathLength / factor);
 
         for (let i = 0; i < n_points; i++) {
@@ -100,6 +100,5 @@ export function pathfinderSVG(pathTags, factor) {
     }
   }
 
-  //TODO: Change thsi will return array of arrays. As multiple fourier transforms.
   return arr;
 }

@@ -10,7 +10,7 @@ var logoP5;
 //Upload png here.
 Dropzone.options.myDropzone = {
   addRemoveLinks: true,
-  acceptedFiles: "image/jpeg,image/png,image/gif,image/svg+xml",
+  acceptedFiles: "image/jpeg,image/png,image/svg+xml",
   maxFiles: 1,
   maxThumbnailFilesize: 50,
 
@@ -139,7 +139,7 @@ function myhandler(arr) {
         p5,
         localTime,
         300,
-        450,
+        500,
         0,
         allFourierX[currSVGPath],
         false
@@ -147,7 +147,7 @@ function myhandler(arr) {
       let vy = epiCycles(
         p5,
         localTime,
-        500,
+        600,
         200,
         p5.HALF_PI,
         allFourierY[currSVGPath],
