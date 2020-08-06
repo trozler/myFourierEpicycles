@@ -7,7 +7,6 @@ import { userSketch } from "./userSketch.js";
 var n_uploads = 0;
 var logoP5;
 
-//Upload png here.
 Dropzone.options.myDropzone = {
   addRemoveLinks: true,
   acceptedFiles: "image/jpeg,image/png,image/svg+xml",
@@ -16,8 +15,6 @@ Dropzone.options.myDropzone = {
 
   init: function () {
     this.on("addedfile", function (file) {
-      // console.log(file);
-      //const preview = document.getElementById("temp1");
       const preview = new Image();
       const reader = new FileReader();
       reader.addEventListener(
@@ -56,7 +53,7 @@ Dropzone.options.myDropzone = {
   },
 };
 
-const factor = 5;
+const factor = 3;
 
 function mainPathFinder(image, svgBool) {
   if (n_uploads > 0) {
@@ -105,9 +102,6 @@ function myhandler(arr) {
         const minAmplitude = 0.01;
         const maxAmplitude = 120;
 
-        //TODO: User tinkering,
-        //If circles touch outside area don't include. Use size of window.
-
         fourierX = dft(p5, x).filter(
           (f) => f.amp > minAmplitude && f.amp < maxAmplitude
         );
@@ -138,7 +132,7 @@ function myhandler(arr) {
       let vx = epiCycles(
         p5,
         localTime,
-        300,
+        250,
         500,
         0,
         allFourierX[currSVGPath],
@@ -147,7 +141,7 @@ function myhandler(arr) {
       let vy = epiCycles(
         p5,
         localTime,
-        600,
+        550,
         200,
         p5.HALF_PI,
         allFourierY[currSVGPath],

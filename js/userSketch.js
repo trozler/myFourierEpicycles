@@ -26,7 +26,7 @@ export let userSketch = function (p5) {
 
   p5.mouseUp = function () {
     state = FOURIER; //release mouse state fourier.
-    const skip = 1; //Skip every other point.
+    const skip = 1;
     for (let i = 0; i < drawing.length; i += skip) {
       x.push(drawing[i].x);
       y.push(drawing[i].y);
@@ -35,9 +35,6 @@ export let userSketch = function (p5) {
     const scale = 1; //A number in the interval (0, 1].
     const minAmplitude = 0.01;
     const maxAmplitude = 120;
-
-    //TODO: USer tinkering,
-    //If circles touch outside area don't include. Use size of window.
 
     fourierX = dft(p5, x).filter(
       (f) => f.amp > minAmplitude && f.amp < maxAmplitude
@@ -56,7 +53,7 @@ export let userSketch = function (p5) {
   p5.setup = function () {
     let cnv = p5.createCanvas(700, 600);
     cnv.parent("draw-yourself");
-    p5.frameRate(25);
+    p5.frameRate(30);
     cnv.mousePressed(p5.mouseDown);
     cnv.mouseReleased(p5.mouseUp);
   };
