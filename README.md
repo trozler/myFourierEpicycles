@@ -18,7 +18,8 @@ Something which makes this project different than other fourier epicycles websit
 
 For cleanest drawing use **closed path, medium sized svg's**. Currently the jpeg and png options work, but there is some ugly noise created during conversion. I'm working on making this conversion as lossless as possible.
 
-In order to find the arbitrary path of any image type in a efficent way, I made use of a fork of an api I created. This can be found [here](https://github.com/trozler/ImageToPoints).
+- First find an svg you want to upload.
+- Then I highly highly recommend running the svg through an optimzer such as [this one.](https://jakearchibald.github.io/svgomg/). Doing this will make a huge differnce for your drawings.
 
 ### How to install
 
