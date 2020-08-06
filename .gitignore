@@ -1,10 +1,8 @@
-js/sketchLogo.js
-js/sketchUser.js
 .vscode/
 .DS_Store
-testStuff/
-css/test.css
+src/css/test.css
 test.html
 promo/
-js/testpaths/
 .DS_Store
+/node_modules
+/*.env
