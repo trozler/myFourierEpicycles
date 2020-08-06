@@ -1,0 +1,29 @@
+{
+  "name": "myfourierepicycles",
+  "version": "1.0.0",
+  "description": "Draw your own fourier epicycles.",
+  "main": "main.js",
+  "engines": {
+    "node": "14.6.0"
+  },
+  "dependencies": {
+    "dropzone": "^5.7.2",
+    "mathjax": "^3.0.5",
+    "p5": "^1.1.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trozler/myFourierEpicycles.git"
+  },
+  "author": "Tony Rosler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trozler/myFourierEpicycles/issues"
+  },
+  "homepage": "https://github.com/trozler/myFourierEpicycles#readme"
+}
