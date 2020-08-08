@@ -3,6 +3,18 @@ import { dft } from "./fourier.js";
 import { epiCycles } from "./epicycles.js";
 import { wave_circle_sketch } from "./waveCircle.js";
 import { userSketch } from "./userSketch.js";
+import { baseSketch } from "./baseEpi.js";
+
+// External dependencies.
+import * as p5 from "p5";
+import * as Dropzone from "dropzone/dist/min/dropzone.min.js";
+
+//Styling
+// import "../css/style.css"; //Include as want to minify.
+// import "../css/dropzone.css"; //Doesnt work some reason, maybe as already minified?
+
+//Run base sketch.
+let baseP5 = new p5(baseSketch);
 
 var n_uploads = 0;
 var logoP5;
@@ -72,7 +84,7 @@ function mainPathFinder(image, svgBool) {
 }
 
 function myhandler(arr) {
-  let customSketch = function (p5) {
+  let customSketch = function (pFIVE) {
     var x = [];
     let y = [];
     let fourierX = [];
@@ -85,10 +97,10 @@ function myhandler(arr) {
     let currPath = [[]];
     let currSVGPath = 0;
 
-    p5.setup = function () {
-      let cnv = p5.createCanvas(700, 600);
+    pFIVE.setup = function () {
+      let cnv = pFIVE.createCanvas(700, 600);
       cnv.parent("upload-sketch");
-      p5.frameRate(20);
+      pFIVE.frameRate(20);
 
       for (let subpath of arr) {
         const skip = 2;
@@ -102,10 +114,10 @@ function myhandler(arr) {
         const minAmplitude = 0.01;
         const maxAmplitude = 120;
 
-        fourierX = dft(p5, x).filter(
+        fourierX = dft(pFIVE, x).filter(
           (f) => f.amp > minAmplitude && f.amp < maxAmplitude
         );
-        fourierY = dft(p5, y).filter(
+        fourierY = dft(pFIVE, y).filter(
           (f) => f.amp > minAmplitude && f.amp < maxAmplitude
         );
 
@@ -126,11 +138,11 @@ function myhandler(arr) {
     };
 
     //Draws pictuer.
-    p5.draw = function () {
-      p5.background(255, 255, 255);
+    pFIVE.draw = function () {
+      pFIVE.background(255, 255, 255);
 
       let vx = epiCycles(
-        p5,
+        pFIVE,
         localTime,
         250,
         500,
@@ -139,37 +151,37 @@ function myhandler(arr) {
         false
       ); //Vector x
       let vy = epiCycles(
-        p5,
+        pFIVE,
         localTime,
         550,
         200,
-        p5.HALF_PI,
+        pFIVE.HALF_PI,
         allFourierY[currSVGPath],
         false
       ); //Vector y.
-      let v = p5.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
+      let v = pFIVE.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
       currPath[currSVGPath].push(v);
-      p5.line(vx.x, vx.y, v.x, v.y); //Draw the x coordinates of drawing.
-      p5.line(vy.x, vy.y, v.x, v.y); //Draw y coordinates of drawing.
+      pFIVE.line(vx.x, vx.y, v.x, v.y); //Draw the x coordinates of drawing.
+      pFIVE.line(vy.x, vy.y, v.x, v.y); //Draw y coordinates of drawing.
 
       for (let mod = 0; mod < currPath.length; mod++) {
         //When we redraw points. We need a break when we reach the end of an svg path.
-        p5.beginShape();
-        p5.noFill();
+        pFIVE.beginShape();
+        pFIVE.noFill();
         //Draw all previouse points of drawing for every frame of animation.
         for (let i = 0; i < currPath[mod].length; i++) {
-          p5.vertex(currPath[mod][i].x, currPath[mod][i].y);
+          pFIVE.vertex(currPath[mod][i].x, currPath[mod][i].y);
         }
-        p5.endShape();
+        pFIVE.endShape();
       }
 
-      const dt = p5.TWO_PI / allFourierY[currSVGPath].length; //Amount of time I move each frame of animatoon.
+      const dt = pFIVE.TWO_PI / allFourierY[currSVGPath].length; //Amount of time I move each frame of animatoon.
       //Should be 2pi a full cycle per frame / the number of fourier coefficents.
       localTime += dt;
 
-      if (localTime >= p5.TWO_PI) {
+      if (localTime >= pFIVE.TWO_PI) {
         //Finsihed one svg path completly.
-        time += p5.TWO_PI;
+        time += pFIVE.TWO_PI;
         // //i.e. We have gone through all svg paths.
         // if (currSVGPath + 1 === allFourierX.length) {
         //   //Set to first path, after we spin around twice.
@@ -182,7 +194,7 @@ function myhandler(arr) {
         currPath.push([]);
 
         //After we have drawn all paths and been around once, we reset and draw again.
-        if (time >= p5.TWO_PI * allFourierX.length) {
+        if (time >= pFIVE.TWO_PI * allFourierX.length) {
           time = 0;
           currPath.length = 0;
           currPath.push([]);

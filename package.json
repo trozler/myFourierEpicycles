@@ -2,7 +2,7 @@
   "name": "myfourierepicycles",
   "version": "1.0.0",
   "description": "Draw your own fourier epicycles.",
-  "main": "main.js",
+  "main": "index.js",
   "engines": {
     "node": "14.6.0"
   },
@@ -12,10 +12,23 @@
     "p5": "^1.1.9",
     "svgo": "^1.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^4.2.1",
+    "npm-watch": "^0.6.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "watch": {
+    "webpack": "src/js/**/*.js",
+    "css": "src/css/style.css"
+  },
   "scripts": {
-    "build": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "npm-watch",
+    "webpack": "webpack || exit 1",
+    "webpack-prod": "webpack --mode=production || exit 1",
+    "css": "cp -r src/css dist/",
+    "build": "npm run webpack && npm run css"
   },
   "repository": {
     "type": "git",

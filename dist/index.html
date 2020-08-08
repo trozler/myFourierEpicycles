@@ -5,33 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
-      myFourierEpicycles cycles. you give me an image I give you epicycles.
+      myFourierEpicycles cycles.
     </title>
-    <!-- TODO: Never directly mention node_modules. -->
+    <!-- Style Sheets -->
     <link
       rel="stylesheet"
-      href="./node_modules/dropzone/dist/min/dropzone.min.css"
+      href="./css/dropzone.min.css"
     />
-    <link rel="stylesheet" href="./src/css/style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    
+    <!-- Scripts -->
     <script>
       MathJax = {
-        tex: {
-          inlineMath: [
-            ["$", "$"],
-            ["\\(", "\\)"],
-          ],
-        },
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
       };
     </script>
-    <script defer src="./node_modules/mathjax/es5/tex-chtml.js"></script>
-    <script
-      defer
-      src="./node_modules/dropzone/dist/min/dropzone.min.js"
-    ></script>
-    <script defer src="./node_modules/p5/lib/p5.min.js"></script>
-    <!-- <script defer type="module" src="./src/js/baseEpi.js"></script> -->
-    <script defer src="./src/js/imagetracer_v1.2.6.js"></script>
-    <script defer type="module" src="./src/js/main.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <!-- <script
+      src="../node_modules/dropzone/dist/min/dropzone.min.js"
+    ></script> -->
+    <!-- <script defer src="../node_modules/p5/lib/p5.min.js"></script>  -->
+    <!-- <script defer type="module" src="../src/js/baseEpi.js"></script> -->
+    <!-- <script defer src="../src/js/imagetracer_v1.2.6.js"></script> -->
+    <!-- <script defer type="module" src="../src/js/index.js"></script> -->
+    <script src="main.bundle.js"></script>
   </head>
   <body>
     <header>
@@ -57,9 +54,6 @@
       </form>
     </div>
     <canvas id="placeholder" width="700" height="600"></canvas>
-    <!-- For drawing points for comparison. -->
-    <!-- <canvas id="pointscanvas" width="400" height="400"></canvas> -->
-
     <div id="upload-sketch"></div>
     <h3>Draw your own below!</h3>
     <div id="draw-yourself"></div>
@@ -124,7 +118,7 @@
       Hopefully at this point, you have some mathematical intuition, as to why revolving circles
       can be used to represent waves. If not here is a neat animation.
     </p>
-    <!-- <div id="wave-circle-bridge"></div> -->
+    <div id="wave-circle-bridge"></div>
 
     <h3>What do those symbols mean?</h3>
     <ul>
