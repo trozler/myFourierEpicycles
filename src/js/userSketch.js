@@ -1,7 +1,7 @@
 import { dft } from "./fourier.js";
 import { epiCycles } from "./epicycles.js";
 
-export let userSketch = function (p5) {
+export let userSketch = function (pFIVE) {
   const USER = 0;
   const FOURIER = 1;
   //2 states eitehr we are taking user input or we completing a fourier transform.
@@ -15,7 +15,7 @@ export let userSketch = function (p5) {
   let drawing = [];
   let state = -1; //To begin width state is negative one i.e. not in user or fft.
 
-  p5.mouseDown = function () {
+  pFIVE.mouseDown = function () {
     state = USER; //Click mouse state user.
     drawing = [];
     x = [];
@@ -24,7 +24,7 @@ export let userSketch = function (p5) {
     path = [];
   };
 
-  p5.mouseUp = function () {
+  pFIVE.mouseUp = function () {
     state = FOURIER; //release mouse state fourier.
     const skip = 1;
     for (let i = 0; i < drawing.length; i += skip) {
@@ -36,10 +36,10 @@ export let userSketch = function (p5) {
     const minAmplitude = 0.01;
     const maxAmplitude = 120;
 
-    fourierX = dft(p5, x).filter(
+    fourierX = dft(pFIVE, x).filter(
       (f) => f.amp > minAmplitude && f.amp < maxAmplitude
     );
-    fourierY = dft(p5, y).filter(
+    fourierY = dft(pFIVE, y).filter(
       (f) => f.amp > minAmplitude && f.amp < maxAmplitude
     );
 
@@ -50,58 +50,58 @@ export let userSketch = function (p5) {
     fourierY.sort((a, b) => b.amp - a.amp);
   };
 
-  p5.setup = function () {
-    let cnv = p5.createCanvas(700, 600);
+  pFIVE.setup = function () {
+    let cnv = pFIVE.createCanvas(700, 600);
     cnv.parent("draw-yourself");
-    p5.frameRate(30);
-    cnv.mousePressed(p5.mouseDown);
-    cnv.mouseReleased(p5.mouseUp);
+    pFIVE.frameRate(30);
+    cnv.mousePressed(pFIVE.mouseDown);
+    cnv.mouseReleased(pFIVE.mouseUp);
   };
 
-  p5.draw = function () {
-    p5.background(47, 72, 88);
+  pFIVE.draw = function () {
+    pFIVE.background(47, 72, 88);
 
     if (state == USER) {
       //If drawing need to record the points relative to window. i.e. center.
-      let point = p5.createVector(
-        p5.mouseX - p5.width / 2,
-        p5.mouseY - p5.height / 2
+      let point = pFIVE.createVector(
+        pFIVE.mouseX - pFIVE.width / 2,
+        pFIVE.mouseY - pFIVE.height / 2
       );
       drawing.push(point); //Push point to drawing.
-      p5.stroke(255);
-      p5.noFill();
-      p5.beginShape(); //Render what the user is drawing.
+      pFIVE.stroke(255);
+      pFIVE.noFill();
+      pFIVE.beginShape(); //Render what the user is drawing.
       for (let p of drawing) {
-        p5.vertex(p.x + p5.width / 2, p.y + p5.height / 2);
+        pFIVE.vertex(p.x + pFIVE.width / 2, p.y + pFIVE.height / 2);
       }
-      p5.endShape();
+      pFIVE.endShape();
     } else if (state == FOURIER) {
-      let vx = epiCycles(p5, time, p5.width / 2, 100, 0, fourierX, true);
+      let vx = epiCycles(pFIVE, time, pFIVE.width / 2, 100, 0, fourierX, true);
       let vy = epiCycles(
-        p5,
+        pFIVE,
         time,
         100,
-        p5.height / 2,
-        p5.HALF_PI,
+        pFIVE.height / 2,
+        pFIVE.HALF_PI,
         fourierY,
         true
       );
-      let v = p5.createVector(vx.x, vy.y);
+      let v = pFIVE.createVector(vx.x, vy.y);
       path.push(v);
-      p5.line(vx.x, vx.y, v.x, v.y);
-      p5.line(vy.x, vy.y, v.x, v.y);
+      pFIVE.line(vx.x, vx.y, v.x, v.y);
+      pFIVE.line(vy.x, vy.y, v.x, v.y);
 
-      p5.beginShape();
-      p5.noFill();
+      pFIVE.beginShape();
+      pFIVE.noFill();
       for (let i = 0; i < path.length; i++) {
-        p5.vertex(path[i].x, path[i].y);
+        pFIVE.vertex(path[i].x, path[i].y);
       }
-      p5.endShape();
+      pFIVE.endShape();
 
-      const dt = p5.TWO_PI / fourierY.length;
+      const dt = pFIVE.TWO_PI / fourierY.length;
       time += dt;
 
-      if (time > p5.TWO_PI) {
+      if (time > pFIVE.TWO_PI) {
         time = 0;
         path = [];
       }

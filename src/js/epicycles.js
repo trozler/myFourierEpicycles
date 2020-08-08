@@ -1,5 +1,5 @@
 export function epiCycles(
-  p5,
+  pFIVE,
   time,
   runningX,
   runningY,
@@ -21,11 +21,11 @@ export function epiCycles(
     runningX += radius * Math.cos(freq * time + phase + rotation);
     runningY += radius * Math.sin(freq * time + phase + rotation);
 
-    p5.stroke(color);
-    p5.noFill();
-    p5.ellipse(prevx, prevy, radius * 2);
-    p5.stroke(color);
-    p5.line(prevx, prevy, runningX, runningY);
+    pFIVE.stroke(color);
+    pFIVE.noFill();
+    pFIVE.ellipse(prevx, prevy, radius * 2);
+    pFIVE.stroke(color);
+    pFIVE.line(prevx, prevy, runningX, runningY);
   }
-  return p5.createVector(runningX, runningY); //Returns the total of the sum. i.e. The coordinate to draw.
+  return pFIVE.createVector(runningX, runningY); //Returns the total of the sum. i.e. The coordinate to draw.
 }

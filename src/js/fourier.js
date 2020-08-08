@@ -4,23 +4,23 @@
  * @function dft Input array of form [x1, x2, ...], output fourier coeff.
  * @param { Array<Number>} points Array of values of some wave. Must be a power of 2.
  */
-export function dft(p5, points) {
+export function dft(pFIVE, points) {
   const fourierCoef = [];
   const numPoints = points.length;
   for (let k = 0; k < numPoints; k++) {
     let re = 0;
     let im = 0;
     for (let n = 0; n < numPoints; n++) {
-      const phi = (p5.TWO_PI * k * n) / numPoints;
-      re += points[n] * p5.cos(phi);
-      im -= points[n] * p5.sin(phi);
+      const phi = (pFIVE.TWO_PI * k * n) / numPoints;
+      re += points[n] * pFIVE.cos(phi);
+      im -= points[n] * pFIVE.sin(phi);
     }
     re /= numPoints; //This scaling is need for when we represent each point in the sample as sum of fourier constants.
     im /= numPoints;
 
     let freq = k; //If we do k / numPoints we just scale teh frequency down for all complex numbers.
-    let amp = p5.sqrt(re * re + im * im); //Magnitued of a vector.
-    let phase = p5.atan2(im, re); //Returns phase.
+    let amp = pFIVE.sqrt(re * re + im * im); //Magnitued of a vector.
+    let phase = pFIVE.atan2(im, re); //Returns phase.
     fourierCoef[k] = { re, im, freq, amp, phase };
   }
   return fourierCoef;

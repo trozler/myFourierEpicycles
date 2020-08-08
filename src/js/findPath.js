@@ -1,3 +1,5 @@
+import { ImageTracer } from "./imagetracer_v1.2.6.js";
+
 /**
  * @param {String} HTML representing any number of sibling elements
  * @return {NodeList}
