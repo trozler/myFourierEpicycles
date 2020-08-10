@@ -14,11 +14,13 @@
   },
   "devDependencies": {
     "css-loader": "^4.2.1",
+    "dot-prop": "^5.2.0",
+    "file-loader": "^6.0.0",
+    "html-loader": "^1.1.0",
     "npm-watch": "^0.6.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "dot-prop": "^5.2.0"
+    "webpack-cli": "^3.3.12"
   },
   "watch": {
     "webpack": "src/js/**/*.js",
@@ -29,7 +31,8 @@
     "webpack": "webpack || exit 1",
     "webpack-prod": "webpack --mode=production || exit 1",
     "css": "cp -r src/css dist/",
-    "build": "npm run webpack && npm run css"
+    "html": "cp src/index.html dist/",
+    "build": "npm run webpack && npm run css && npm run html"
   },
   "repository": {
     "type": "git",
