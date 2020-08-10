@@ -7,7 +7,7 @@ export let wave_circle_sketch = function (pFIVE) {
   pFIVE.setup = function () {
     let cnv = pFIVE.createCanvas(600, 400);
     cnv.parent("wave-circle-bridge");
-    pFIVE.frameRate(46);
+    pFIVE.frameRate(20);
   };
 
   pFIVE.draw = function () {

@@ -4,7 +4,6 @@ import { epiCycles } from "./epicycles.js";
 import { wave_circle_sketch } from "./waveCircle.js";
 import { userSketch } from "./userSketch.js";
 
-// External dependencies.
 import * as p5 from "p5";
 
 const factor = 3;

@@ -9,13 +9,13 @@ import * as Dropzone from "dropzone/dist/min/dropzone.min.js";
 //Images
 import Deer from "../images/Deer.svg";
 import Dog from "../images/Dog.svg";
-import Epl from "../images/epl-icon.svg";
 import Tux from "../images/tux.svg";
+import Epl from "../images/epl-icon.svg";
 
 //Add event listener for each image.
 const imageNames = { deer: Deer, epl: Epl, tux: Tux, dog: Dog };
 
-for (const n in imageNames) {
+for (let n in imageNames) {
   document.getElementById(n).src = imageNames[n];
 
   document.getElementById(n).addEventListener("click", (e) => {
@@ -27,6 +27,7 @@ for (const n in imageNames) {
   });
 }
 
+//Start with deer being drawn.
 window.addEventListener("load", () => imageHandler("deer"), { once: true });
 
 function removeCanvas(id) {

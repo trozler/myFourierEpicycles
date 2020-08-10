@@ -11,6 +11,16 @@ module.exports = {
   stats: {
     colors: true,
   },
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 10000,
+    ignored: [
+      "src/js/imagetracer_v1.2.6.js",
+      "node_modules/**",
+      "src/js/computedPaths/**",
+    ],
+  },
+
   // Can put to production for better perfomance. i.e. may minimse some code.
   mode: "development",
   devtool: "source-map",
@@ -25,17 +35,13 @@ module.exports = {
       //   use: ["style-loader", "css-loader"],
       // },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"],
+        test: /\.(png|svg|jpg)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]",
+          outputPath: "images/",
+        },
       },
     ],
   },
-  // resolve: {
-  //   alias: {
-  //     DropzoneStyle: path.resolve(
-  //       __dirname,
-  //       "node_modules/dropzone/dist/min/dropzone.min.css"
-  //     ),
-  //   },
-  // },
 };
