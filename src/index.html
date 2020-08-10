@@ -13,21 +13,11 @@
       href="./css/dropzone.min.css"
     />
     <link rel="stylesheet" href="./css/style.css" />
-    
     <!-- Scripts -->
     <script>
-      MathJax = {
-        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-      };
+      MathJax = {tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }};
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    <!-- <script
-      src="../node_modules/dropzone/dist/min/dropzone.min.js"
-    ></script> -->
-    <!-- <script defer src="../node_modules/p5/lib/p5.min.js"></script>  -->
-    <!-- <script defer type="module" src="../src/js/baseEpi.js"></script> -->
-    <!-- <script defer src="../src/js/imagetracer_v1.2.6.js"></script> -->
-    <!-- <script defer type="module" src="../src/js/index.js"></script> -->
     <script src="main.bundle.js"></script>
   </head>
   <body>
@@ -35,7 +25,38 @@
       myFourierEpicycles cycles.
       <p>By Tony Rosler.</p>
     </header>
-    <div id="startup"></div>
+    <div id="startup">
+      <table>
+        <tr>
+          <td>
+            <a href="">
+              <img src="" alt="deer" class="base_img" id="deer" />
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="">
+              <img src="" alt="epl" class="base_img" id="epl" />
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="">
+              <img src="" alt="tux" class="base_img" id="tux" />
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="">
+              <img src="" alt="dog" class="base_img" id="dog" />
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
     <h3>
       Upload an image and see its epicycles.
       <br />
@@ -43,7 +64,6 @@
         >To avoid drawings with crossing lines, use closed path svgs with seperate path fields for individual components.</span
       >
     </h3>
-
     <div>
       <form action="/target" class="dropzone" id="my-dropzone">
         <div class="dz-message needsclick">
@@ -184,7 +204,7 @@
     </p>
     <p>
       <a href="https://en.wikipedia.org/wiki/Fourier_series" target="_blank"
-        >Wikepedia - dourier series</a
+        >Wikepedia - fourier series</a
       >
       well written and covers the math decently well.
     </p>
@@ -209,7 +229,6 @@
       >
       gives a basic guide on how you can create your own epicycles.
     </p>
-
     <p>
       I have open sourced the code and you can find it on my
       <a href="https://github.com/trozler/myFourierEpicycles" target="_blank">github.</a>

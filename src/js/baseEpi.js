@@ -1,45 +1,71 @@
 import { epiCycles } from "./epicycles.js";
 import { reindeerX, reindeerY } from "./computedPaths/fourier/reindeer.js";
+import { dogX, dogY } from "./computedPaths/fourier/dog.js";
+import { eplX, eplY } from "./computedPaths/fourier/epl.js";
+import { tuxX, tuxY } from "./computedPaths/fourier/tux.js";
 
-export let baseSketch = function (pFIVE) {
-  let fourierX = reindeerX;
-  let fourierY = reindeerY;
-  let time = 0;
-  let path = [];
-  pFIVE.setup = function () {
-    let cnv = pFIVE.createCanvas(700, 600);
-    cnv.parent("startup");
-    pFIVE.frameRate(25);
-  };
+//Run base sketch.
+export function imageHandler(name) {
+  let baseSketch = function (pFIVE) {
+    let fourierX;
+    let fourierY;
 
-  //Draws pictuer.
-  pFIVE.draw = function () {
-    pFIVE.background(255, 255, 255);
+    switch (name) {
+      case "deer":
+        fourierX = reindeerX;
+        fourierY = reindeerY;
 
-    //Create the 2 epicycle generaters.
-    let vx = epiCycles(pFIVE, time, 300, 450, 0, fourierX, false); //Vector x
-    let vy = epiCycles(pFIVE, time, 500, 200, pFIVE.HALF_PI, fourierY, false); //Vector y.
-    let v = pFIVE.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
-    path.push(v);
-    pFIVE.line(vx.x, vx.y, v.x, v.y); //Draw the x and y of drawing.
-    pFIVE.line(vy.x, vy.y, v.x, v.y);
-    pFIVE.beginShape();
-    pFIVE.noFill();
+      case "epl":
+        fourierX = eplX;
+        fourierY = eplY;
 
-    //Draw all previouse points of drawing for every frame of animation.
-    for (let i = 0; i < path.length; i++) {
-      pFIVE.vertex(path[i].x, path[i].y);
+      case "dog":
+        fourierX = dogX;
+        fourierY = dogY;
+
+      case "tux":
+        fourierX = tuxX;
+        fourierY = tuxY;
     }
-    pFIVE.endShape();
+    let time = 0;
+    let path = [];
+    pFIVE.setup = function () {
+      let cnv = pFIVE.createCanvas(700, 600);
+      cnv.parent("startup");
+      cnv.id("baseCanvas");
+      pFIVE.frameRate(20);
+    };
 
-    const dt = pFIVE.TWO_PI / fourierY.length; //Amount of time I move each frame of animatoon.
-    //Should be 2pi a full cycle per frame / the number of fourier coefficents.
-    time += dt;
+    //Draws pictuer.
+    pFIVE.draw = function () {
+      pFIVE.background(255, 255, 255);
 
-    //This resets drawing when we complete it.
-    if (time > pFIVE.TWO_PI * 2) {
-      time = 0;
-      path = [];
-    }
+      //Create the 2 epicycle generaters.
+      let vx = epiCycles(pFIVE, time, 300, 450, 0, fourierX, false); //Vector x
+      let vy = epiCycles(pFIVE, time, 500, 200, pFIVE.HALF_PI, fourierY, false); //Vector y.
+      let v = pFIVE.createVector(vx.x, vy.y); //As we want coordinate from fourierX and y from fourierY.
+      path.push(v);
+      pFIVE.line(vx.x, vx.y, v.x, v.y); //Draw the x and y of drawing.
+      pFIVE.line(vy.x, vy.y, v.x, v.y);
+      pFIVE.beginShape();
+      pFIVE.noFill();
+
+      //Draw all previouse points of drawing for every frame of animation.
+      for (let i = 0; i < path.length; i++) {
+        pFIVE.vertex(path[i].x, path[i].y);
+      }
+      pFIVE.endShape();
+
+      const dt = pFIVE.TWO_PI / fourierY.length; //Amount of time I move each frame of animatoon.
+      //Should be 2pi a full cycle per frame / the number of fourier coefficents.
+      time += dt;
+
+      //This resets drawing when we complete it.
+      if (time > pFIVE.TWO_PI * 2) {
+        time = 0;
+        path = [];
+      }
+    };
   };
-};
+  new p5(baseSketch);
+}

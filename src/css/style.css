@@ -119,3 +119,49 @@ canvas {
   border-radius: 5px;
   background-color: white;
 }
+
+.base_img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 10px; /* Rounded border */
+  padding: 8px; /* Some padding */
+  width: 100px; /* Set a small width */
+  height: 100px;
+  cursor: pointer;
+}
+
+/* Add a hover effect (blue shadow) */
+.base_img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  order: 2;
+}
+
+#startup {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#baseCanvas {
+  max-width: 700px !important;
+  width: 75% !important;
+  margin: 0 !important;
+  margin-right: 20px !important;
+  order: 1;
+
+  -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: white;
+}
