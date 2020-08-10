@@ -3,6 +3,7 @@ import { reindeerX, reindeerY } from "./computedPaths/fourier/reindeer.js";
 import { dogX, dogY } from "./computedPaths/fourier/dog.js";
 import { eplX, eplY } from "./computedPaths/fourier/epl.js";
 import { tuxX, tuxY } from "./computedPaths/fourier/tux.js";
+import * as p5 from "p5";
 
 //Run base sketch.
 export function imageHandler(name) {
@@ -14,18 +15,25 @@ export function imageHandler(name) {
       case "deer":
         fourierX = reindeerX;
         fourierY = reindeerY;
+        break;
 
       case "epl":
         fourierX = eplX;
         fourierY = eplY;
+        break;
 
       case "dog":
         fourierX = dogX;
         fourierY = dogY;
+        break;
 
       case "tux":
         fourierX = tuxX;
         fourierY = tuxY;
+        break;
+
+      default:
+        throw new Error("Error, no match found for the base image selected.");
     }
     let time = 0;
     let path = [];

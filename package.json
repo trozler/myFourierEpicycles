@@ -13,6 +13,9 @@
     "svgo": "^1.3.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
     "dot-prop": "^5.2.0",
     "file-loader": "^6.0.0",
@@ -31,8 +34,8 @@
     "webpack": "webpack || exit 1",
     "webpack-prod": "webpack --mode=production || exit 1",
     "css": "cp -r src/css dist/",
-    "html": "cp src/index.html dist/",
-    "build": "npm run webpack && npm run css && npm run html"
+    "html": "cp src/indexSrc.html dist/index.html",
+    "build": "npm run css && npm run html && npm run webpack"
   },
   "repository": {
     "type": "git",

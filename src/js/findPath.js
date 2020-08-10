@@ -27,11 +27,6 @@ export function pathfinderImage(imageurl, cback, factor) {
       var doc = parser.parseFromString(svgstr, "image/svg+xml");
       var pathTags = doc.getElementsByTagName("path");
 
-      // let canvas = document.getElementById("pointscanvas");
-      // let canvasWidth = canvas.width;
-      // let canvasHeight = canvas.height;
-      // let ctx = canvas.getContext("2d");
-
       //Find points
       let arr = [];
       for (let j = 0; j < pathTags.length; j++) {
