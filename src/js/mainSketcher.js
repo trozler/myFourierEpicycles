@@ -3,26 +3,34 @@ import { dft } from "./fourier.js";
 import { epiCycles } from "./epicycles.js";
 import { wave_circle_sketch } from "./waveCircle.js";
 import { userSketch } from "./userSketch.js";
+import { removeCanvas, addScrollEvenListener } from "./util.js";
+import pFiveSketch from "./pFiveSketch.js";
 
 import * as p5 from "p5";
 
 const factor = 3;
 var n_uploads = 0;
-var logoP5;
+
+const LOGO = new pFiveSketch();
+const WAVE = new pFiveSketch();
+const USER = new pFiveSketch();
 
 export function mainPathFinder(image, svgBool) {
   if (n_uploads > 0) {
-    logoP5.remove();
+    LOGO.removep5();
   } else {
     n_uploads++;
-    let el = document.getElementById("placeholder");
-    el.parentNode.removeChild(el);
+    removeCanvas("placeholder");
   }
   if (svgBool) {
     var arr = pathfinderSVG(image, factor);
     myhandler(arr);
   } else {
     pathfinderImage(image.src, myhandler, factor);
+  }
+  if (n_uploads === 1) {
+    //Just uploaded an image for the first time, add event listener.
+    addScrollEvenListener(LOGO);
   }
 }
 
@@ -43,6 +51,7 @@ function myhandler(arr) {
     pFIVE.setup = function () {
       let cnv = pFIVE.createCanvas(700, 600);
       cnv.parent("upload-sketch");
+      cnv.id("logoCanvas");
       pFIVE.frameRate(20);
 
       for (let subpath of arr) {
@@ -136,9 +145,10 @@ function myhandler(arr) {
       }
     };
   };
-  logoP5 = new p5(customSketch);
+  LOGO.sketchP5 = new p5(customSketch);
 }
 
-new p5(userSketch);
+USER.sketchP5 = new p5(userSketch); //No event listener.
+WAVE.sketchP5 = new p5(wave_circle_sketch);
 
-new p5(wave_circle_sketch);
+addScrollEvenListener(WAVE);

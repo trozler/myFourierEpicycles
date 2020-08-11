@@ -1,6 +1,7 @@
-import { imageHandler } from "./baseEpi.js";
+import { imageHandler, BASE } from "./baseEpi.js";
 import { mainPathFinder } from "./mainSketcher.js";
 import * as Dropzone from "dropzone/dist/min/dropzone.min.js";
+import { addScrollEvenListener } from "./util.js";
 
 //Styling
 // import "../css/style.css"; //Include as want to minify.
@@ -12,28 +13,31 @@ import Dog from "../images/Dog.svg";
 import Tux from "../images/tux.svg";
 import Epl from "../images/epl-icon.svg";
 
-//Add event listener for each image.
 const imageNames = { deer: Deer, epl: Epl, tux: Tux, dog: Dog };
 
 for (let n in imageNames) {
-  document.getElementById(n).src = imageNames[n];
+  document.getElementById(n).src = imageNames[n]; //Adding source to image, as webpack.
 
+  //Add event listener for click on each image.
   document.getElementById(n).addEventListener("click", (e) => {
     e.preventDefault();
-    if (document.getElementById("baseCanvas") !== null) {
-      removeCanvas("baseCanvas");
-    }
+    BASE.removeP5();
     imageHandler(n);
   });
 }
 
 //Start with deer being drawn.
-window.addEventListener("load", () => imageHandler("deer"), { once: true });
+window.addEventListener(
+  "load",
+  (e) => {
+    e.preventDefault();
+    imageHandler("deer");
+  },
+  { once: true }
+);
 
-function removeCanvas(id) {
-  let el = document.getElementById(id);
-  el.parentNode.removeChild(el);
-}
+//Add event listener to some canvases, only animate when in viewbox.
+addScrollEvenListener(BASE);
 
 Dropzone.options.myDropzone = {
   addRemoveLinks: true,
