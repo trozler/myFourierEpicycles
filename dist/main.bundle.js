@@ -233,19 +233,21 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************!*\
   !*** ./src/js/baseEpi.js ***!
   \***************************/
-/*! exports provided: imageHandler */
+/*! exports provided: BASE, imageHandler */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BASE", function() { return BASE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "imageHandler", function() { return imageHandler; });
 /* harmony import */ var _epicycles_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./epicycles.js */ "./src/js/epicycles.js");
 /* harmony import */ var _computedPaths_fourier_reindeer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./computedPaths/fourier/reindeer.js */ "./src/js/computedPaths/fourier/reindeer.js");
 /* harmony import */ var _computedPaths_fourier_dog_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./computedPaths/fourier/dog.js */ "./src/js/computedPaths/fourier/dog.js");
 /* harmony import */ var _computedPaths_fourier_epl_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./computedPaths/fourier/epl.js */ "./src/js/computedPaths/fourier/epl.js");
 /* harmony import */ var _computedPaths_fourier_tux_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./computedPaths/fourier/tux.js */ "./src/js/computedPaths/fourier/tux.js");
-/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! p5 */ "./node_modules/p5/lib/p5.min.js");
-/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(p5__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _pFiveSketch_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pFiveSketch.js */ "./src/js/pFiveSketch.js");
+/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! p5 */ "./node_modules/p5/lib/p5.min.js");
+/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(p5__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -253,7 +255,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//Run base sketch.
+
+
+const BASE = new _pFiveSketch_js__WEBPACK_IMPORTED_MODULE_5__["default"]();
+
 function imageHandler(name) {
   let baseSketch = function (pFIVE) {
     let fourierX;
@@ -323,7 +328,7 @@ function imageHandler(name) {
       }
     };
   };
-  new p5__WEBPACK_IMPORTED_MODULE_5__(baseSketch);
+  BASE.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_6__(baseSketch);
 }
 
 
@@ -1873,10 +1878,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mainSketcher_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainSketcher.js */ "./src/js/mainSketcher.js");
 /* harmony import */ var dropzone_dist_min_dropzone_min_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dropzone/dist/min/dropzone.min.js */ "./node_modules/dropzone/dist/min/dropzone.min.js");
 /* harmony import */ var dropzone_dist_min_dropzone_min_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dropzone_dist_min_dropzone_min_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _images_Deer_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../images/Deer.svg */ "./src/images/Deer.svg");
-/* harmony import */ var _images_Dog_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../images/Dog.svg */ "./src/images/Dog.svg");
-/* harmony import */ var _images_tux_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../images/tux.svg */ "./src/images/tux.svg");
-/* harmony import */ var _images_epl_icon_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../images/epl-icon.svg */ "./src/images/epl-icon.svg");
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./util.js */ "./src/js/util.js");
+/* harmony import */ var _images_Deer_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../images/Deer.svg */ "./src/images/Deer.svg");
+/* harmony import */ var _images_Dog_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../images/Dog.svg */ "./src/images/Dog.svg");
+/* harmony import */ var _images_tux_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../images/tux.svg */ "./src/images/tux.svg");
+/* harmony import */ var _images_epl_icon_svg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../images/epl-icon.svg */ "./src/images/epl-icon.svg");
+
 
 
 
@@ -1891,28 +1898,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//Add event listener for each image.
-const imageNames = { deer: _images_Deer_svg__WEBPACK_IMPORTED_MODULE_3__["default"], epl: _images_epl_icon_svg__WEBPACK_IMPORTED_MODULE_6__["default"], tux: _images_tux_svg__WEBPACK_IMPORTED_MODULE_5__["default"], dog: _images_Dog_svg__WEBPACK_IMPORTED_MODULE_4__["default"] };
+const imageNames = { deer: _images_Deer_svg__WEBPACK_IMPORTED_MODULE_4__["default"], epl: _images_epl_icon_svg__WEBPACK_IMPORTED_MODULE_7__["default"], tux: _images_tux_svg__WEBPACK_IMPORTED_MODULE_6__["default"], dog: _images_Dog_svg__WEBPACK_IMPORTED_MODULE_5__["default"] };
 
 for (let n in imageNames) {
-  document.getElementById(n).src = imageNames[n];
+  document.getElementById(n).src = imageNames[n]; //Adding source to image, as webpack.
 
+  //Add event listener for click on each image.
   document.getElementById(n).addEventListener("click", (e) => {
     e.preventDefault();
-    if (document.getElementById("baseCanvas") !== null) {
-      removeCanvas("baseCanvas");
-    }
+    _baseEpi_js__WEBPACK_IMPORTED_MODULE_0__["BASE"].removeP5();
     Object(_baseEpi_js__WEBPACK_IMPORTED_MODULE_0__["imageHandler"])(n);
   });
 }
 
 //Start with deer being drawn.
-window.addEventListener("load", () => Object(_baseEpi_js__WEBPACK_IMPORTED_MODULE_0__["imageHandler"])("deer"), { once: true });
+window.addEventListener(
+  "load",
+  (e) => {
+    e.preventDefault();
+    Object(_baseEpi_js__WEBPACK_IMPORTED_MODULE_0__["imageHandler"])("deer");
+  },
+  { once: true }
+);
 
-function removeCanvas(id) {
-  let el = document.getElementById(id);
-  el.parentNode.removeChild(el);
-}
+//Add event listener to some canvases, only animate when in viewbox.
+Object(_util_js__WEBPACK_IMPORTED_MODULE_3__["addScrollEvenListener"])(_baseEpi_js__WEBPACK_IMPORTED_MODULE_0__["BASE"]);
 
 dropzone_dist_min_dropzone_min_js__WEBPACK_IMPORTED_MODULE_2__["options"].myDropzone = {
   addRemoveLinks: true,
@@ -1978,8 +1988,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _epicycles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./epicycles.js */ "./src/js/epicycles.js");
 /* harmony import */ var _waveCircle_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./waveCircle.js */ "./src/js/waveCircle.js");
 /* harmony import */ var _userSketch_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./userSketch.js */ "./src/js/userSketch.js");
-/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! p5 */ "./node_modules/p5/lib/p5.min.js");
-/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(p5__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util.js */ "./src/js/util.js");
+/* harmony import */ var _pFiveSketch_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pFiveSketch.js */ "./src/js/pFiveSketch.js");
+/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! p5 */ "./node_modules/p5/lib/p5.min.js");
+/* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(p5__WEBPACK_IMPORTED_MODULE_7__);
+
+
 
 
 
@@ -1990,21 +2004,27 @@ __webpack_require__.r(__webpack_exports__);
 
 const factor = 3;
 var n_uploads = 0;
-var logoP5;
+
+const LOGO = new _pFiveSketch_js__WEBPACK_IMPORTED_MODULE_6__["default"]();
+const WAVE = new _pFiveSketch_js__WEBPACK_IMPORTED_MODULE_6__["default"]();
+const USER = new _pFiveSketch_js__WEBPACK_IMPORTED_MODULE_6__["default"]();
 
 function mainPathFinder(image, svgBool) {
   if (n_uploads > 0) {
-    logoP5.remove();
+    LOGO.removep5();
   } else {
     n_uploads++;
-    let el = document.getElementById("placeholder");
-    el.parentNode.removeChild(el);
+    Object(_util_js__WEBPACK_IMPORTED_MODULE_5__["removeCanvas"])("placeholder");
   }
   if (svgBool) {
     var arr = Object(_findPath_js__WEBPACK_IMPORTED_MODULE_0__["pathfinderSVG"])(image, factor);
     myhandler(arr);
   } else {
     Object(_findPath_js__WEBPACK_IMPORTED_MODULE_0__["pathfinderImage"])(image.src, myhandler, factor);
+  }
+  if (n_uploads === 1) {
+    //Just uploaded an image for the first time, add event listener.
+    Object(_util_js__WEBPACK_IMPORTED_MODULE_5__["addScrollEvenListener"])(LOGO);
   }
 }
 
@@ -2025,6 +2045,7 @@ function myhandler(arr) {
     pFIVE.setup = function () {
       let cnv = pFIVE.createCanvas(700, 600);
       cnv.parent("upload-sketch");
+      cnv.id("logoCanvas");
       pFIVE.frameRate(20);
 
       for (let subpath of arr) {
@@ -2118,12 +2139,42 @@ function myhandler(arr) {
       }
     };
   };
-  logoP5 = new p5__WEBPACK_IMPORTED_MODULE_5__(customSketch);
+  LOGO.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_7__(customSketch);
 }
 
-new p5__WEBPACK_IMPORTED_MODULE_5__(_userSketch_js__WEBPACK_IMPORTED_MODULE_4__["userSketch"]);
+USER.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_7__(_userSketch_js__WEBPACK_IMPORTED_MODULE_4__["userSketch"]); //No event listener.
+WAVE.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_7__(_waveCircle_js__WEBPACK_IMPORTED_MODULE_3__["wave_circle_sketch"]);
 
-new p5__WEBPACK_IMPORTED_MODULE_5__(_waveCircle_js__WEBPACK_IMPORTED_MODULE_3__["wave_circle_sketch"]);
+Object(_util_js__WEBPACK_IMPORTED_MODULE_5__["addScrollEvenListener"])(WAVE);
+
+
+/***/ }),
+
+/***/ "./src/js/pFiveSketch.js":
+/*!*******************************!*\
+  !*** ./src/js/pFiveSketch.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return pFiveSketch; });
+/** This class keeps track of all refrences of a p5 sketch.
+ * @class
+ * @field timeoutID, current timeoutID corresponding to event listener.
+ * @field sketchP5, p5 object.
+ */
+class pFiveSketch {
+  constructor(timeoutID, sketchP5) {
+    this.timeoutID = timeoutID;
+    this.sketchP5 = sketchP5;
+  }
+
+  removeP5() {
+    this.sketchP5.remove();
+  }
+}
 
 
 /***/ }),
@@ -2254,6 +2305,71 @@ let userSketch = function (pFIVE) {
 
 /***/ }),
 
+/***/ "./src/js/util.js":
+/*!************************!*\
+  !*** ./src/js/util.js ***!
+  \************************/
+/*! exports provided: removeCanvas, elementInView, updateManySketch, addScrollEvenListener */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeCanvas", function() { return removeCanvas; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "elementInView", function() { return elementInView; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateManySketch", function() { return updateManySketch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addScrollEvenListener", function() { return addScrollEvenListener; });
+function removeCanvas(id) {
+  let el = document.getElementById(id);
+  el.parentNode.removeChild(el);
+}
+
+function elementInView(EL) {
+  const boundingRect = EL.sketchP5.canvas.getBoundingClientRect();
+  return (
+    boundingRect.bottom >= 0 &&
+    boundingRect.top <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    boundingRect.right >= 0 &&
+    boundingRect.left <=
+      (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+function updateManySketch(inFrame, EL) {
+  if (inFrame) {
+    //Want to make canvas loop, if it isn't doing so already.
+    if (!EL.sketchP5.isLooping()) {
+      EL.sketchP5.loop();
+    }
+  } else {
+    //Stop the drawing, as not in frame.
+    if (EL.sketchP5.isLooping()) {
+      EL.sketchP5.noLoop();
+    }
+  }
+}
+
+function addScrollEvenListener(EL) {
+  //Add event listener to log canvas, only animate when in viewbox.
+  window.addEventListener("scroll", () => {
+    if (EL.timeoutID) {
+      window.clearTimeout(EL.timeoutID);
+    }
+    EL.timeoutID = window.setTimeout(function () {
+      if (elementInView(EL)) {
+        //Should make loop executing, if not already true.
+        updateManySketch(true, EL);
+      } else {
+        //Should stop loop executing if not already the case.
+        updateManySketch(false, EL);
+      }
+    }, 500);
+  });
+}
+
+
+/***/ }),
+
 /***/ "./src/js/waveCircle.js":
 /*!******************************!*\
   !*** ./src/js/waveCircle.js ***!
@@ -2273,6 +2389,7 @@ let wave_circle_sketch = function (pFIVE) {
   pFIVE.setup = function () {
     let cnv = pFIVE.createCanvas(600, 400);
     cnv.parent("wave-circle-bridge");
+    cnv.id("waveCanvas");
     pFIVE.frameRate(20);
   };
 

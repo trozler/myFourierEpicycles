@@ -3,9 +3,12 @@ import { reindeerX, reindeerY } from "./computedPaths/fourier/reindeer.js";
 import { dogX, dogY } from "./computedPaths/fourier/dog.js";
 import { eplX, eplY } from "./computedPaths/fourier/epl.js";
 import { tuxX, tuxY } from "./computedPaths/fourier/tux.js";
+import pFiveSketch from "./pFiveSketch.js";
+
 import * as p5 from "p5";
 
-//Run base sketch.
+export const BASE = new pFiveSketch();
+
 export function imageHandler(name) {
   let baseSketch = function (pFIVE) {
     let fourierX;
@@ -75,5 +78,5 @@ export function imageHandler(name) {
       }
     };
   };
-  new p5(baseSketch);
+  BASE.sketchP5 = new p5(baseSketch);
 }
