@@ -2142,10 +2142,12 @@ function myhandler(arr) {
   LOGO.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_7__(customSketch);
 }
 
-USER.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_7__(_userSketch_js__WEBPACK_IMPORTED_MODULE_4__["userSketch"]); //No event listener.
+USER.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_7__(_userSketch_js__WEBPACK_IMPORTED_MODULE_4__["userSketch"]);
 WAVE.sketchP5 = new p5__WEBPACK_IMPORTED_MODULE_7__(_waveCircle_js__WEBPACK_IMPORTED_MODULE_3__["wave_circle_sketch"]);
 
+//Adding scroll event listners.
 Object(_util_js__WEBPACK_IMPORTED_MODULE_5__["addScrollEvenListener"])(WAVE);
+Object(_util_js__WEBPACK_IMPORTED_MODULE_5__["addScrollEvenListener"])(USER);
 
 
 /***/ }),
@@ -2352,6 +2354,7 @@ function updateManySketch(inFrame, EL) {
 function addScrollEvenListener(EL) {
   //Add event listener to log canvas, only animate when in viewbox.
   window.addEventListener("scroll", () => {
+    //Everytime you scroll set new timeout ID, so dont make costly callback calls.
     if (EL.timeoutID) {
       window.clearTimeout(EL.timeoutID);
     }

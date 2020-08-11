@@ -148,7 +148,9 @@ function myhandler(arr) {
   LOGO.sketchP5 = new p5(customSketch);
 }
 
-USER.sketchP5 = new p5(userSketch); //No event listener.
+USER.sketchP5 = new p5(userSketch);
 WAVE.sketchP5 = new p5(wave_circle_sketch);
 
+//Adding scroll event listners.
 addScrollEvenListener(WAVE);
+addScrollEvenListener(USER);

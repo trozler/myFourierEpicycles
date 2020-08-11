@@ -32,6 +32,7 @@ export function updateManySketch(inFrame, EL) {
 export function addScrollEvenListener(EL) {
   //Add event listener to log canvas, only animate when in viewbox.
   window.addEventListener("scroll", () => {
+    //Everytime you scroll set new timeout ID, so dont make costly callback calls.
     if (EL.timeoutID) {
       window.clearTimeout(EL.timeoutID);
     }
