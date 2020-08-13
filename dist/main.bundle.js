@@ -53850,7 +53850,7 @@ DropzoneMin_dropzone_min_js__WEBPACK_IMPORTED_MODULE_3__["options"].myDropzone =
       const reader = new FileReader();
       reader.addEventListener(
         "load",
-        function (e) {
+        async function (e) {
           if (file.type !== "image/svg+xml") {
             // convert uploaded image file to base64 string
             preview.title = file.name;
@@ -53860,7 +53860,7 @@ DropzoneMin_dropzone_min_js__WEBPACK_IMPORTED_MODULE_3__["options"].myDropzone =
             Object(_mainSketcher_js__WEBPACK_IMPORTED_MODULE_1__["mainPathFinder"])(preview, false);
           } else {
             let svgData = e.target.result;
-            const tempRes = Object(_util_js__WEBPACK_IMPORTED_MODULE_2__["optimiseSvg"])(svgData);
+            const tempRes = await Object(_util_js__WEBPACK_IMPORTED_MODULE_2__["optimiseSvg"])(svgData);
             if (tempRes === null) {
               console.log("Svgo error, returning null");
               svgData = svgData.slice(svgData.indexOf("<svg"));
@@ -54260,7 +54260,7 @@ const svgo = new svgo__WEBPACK_IMPORTED_MODULE_0___default.a();
 function optimiseSvg(svgstr) {
   return svgo
     .optimize(svgstr)
-    .then((val) => val)
+    .then((val) => val.data)
     .catch((err) => {
       consol.log(err);
       return null;

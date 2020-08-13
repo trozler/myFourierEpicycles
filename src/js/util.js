@@ -17,7 +17,7 @@ const svgo = new SVGO();
 export function optimiseSvg(svgstr) {
   return svgo
     .optimize(svgstr)
-    .then((val) => val)
+    .then((val) => val.data)
     .catch((err) => {
       consol.log(err);
       return null;
