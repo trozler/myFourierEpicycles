@@ -62,7 +62,7 @@ Dropzone.options.myDropzone = {
             mainPathFinder(preview, false);
           } else {
             let svgData = e.target.result;
-            const tempRes = optimiseSvg(svgData);
+            const tempRes = await optimiseSvg(svgData);
             if (tempRes === null) {
               console.log("Svgo error, returning null");
               svgData = svgData.slice(svgData.indexOf("<svg"));
