@@ -1,7 +1,8 @@
 import { imageHandler, BASE } from "./baseEpi.js";
 import { mainPathFinder } from "./mainSketcher.js";
-import * as Dropzone from "dropzone/dist/min/dropzone.min.js";
-import { addScrollEvenListener } from "./util.js";
+import { addScrollEvenListener, optimiseSvg } from "./util.js";
+
+import * as Dropzone from "DropzoneMin/dropzone.min.js";
 
 //Styling
 // import "../css/style.css"; //Include as want to minify.
@@ -51,7 +52,7 @@ Dropzone.options.myDropzone = {
       const reader = new FileReader();
       reader.addEventListener(
         "load",
-        function (e) {
+        async function (e) {
           if (file.type !== "image/svg+xml") {
             // convert uploaded image file to base64 string
             preview.title = file.name;
@@ -60,11 +61,17 @@ Dropzone.options.myDropzone = {
             //Finally make call to main flow depending on image uploaded.
             mainPathFinder(preview, false);
           } else {
-            var svgData = e.target.result;
-            svgData = svgData.slice(svgData.indexOf("<svg"));
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(svgData, "image/svg+xml");
-            var pathTags = doc.getElementsByTagName("path");
+            let svgData = e.target.result;
+            const tempRes = optimiseSvg(svgData);
+            if (tempRes === null) {
+              console.log("Svgo error, returning null");
+              svgData = svgData.slice(svgData.indexOf("<svg"));
+            } else {
+              svgData = tempRes;
+            }
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(svgData, "image/svg+xml");
+            const pathTags = doc.getElementsByTagName("path");
             mainPathFinder(pathTags, true);
           }
         },
