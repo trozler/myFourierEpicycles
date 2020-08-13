@@ -1,18 +1,6 @@
-import SVGO from "svgo";
+import SVGO from "./svgoCustom/lib/svgo.js";
 
 const svgo = new SVGO();
-
-// export async function optimiseSvg(svgstr) {
-//   let val;
-//   try {
-//     val = await svgo.optimize(svgstr);
-//     val = val.data;
-//   } catch (err) {
-//     console.log(err);
-//     val = null;
-//   }
-//   return val;
-// }
 
 export function optimiseSvg(svgstr) {
   return svgo
