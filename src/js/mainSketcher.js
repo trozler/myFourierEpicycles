@@ -17,7 +17,7 @@ const USER = new pFiveSketch();
 
 export function mainPathFinder(image, svgBool) {
   if (n_uploads > 0) {
-    LOGO.removep5();
+    LOGO.removeP5();
   } else {
     n_uploads++;
     removeCanvas("placeholder");

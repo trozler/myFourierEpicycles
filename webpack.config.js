@@ -9,7 +9,7 @@ module.exports = {
   stats: {
     colors: true,
   },
-  watch: true,
+  watch: false,
   watchOptions: {
     aggregateTimeout: 10000,
     ignored: [
@@ -18,15 +18,15 @@ module.exports = {
       "src/js/computedPaths/**",
     ],
   },
-  // Can put to production for better perfomance. i.e. may minimse some code.
   mode: "development",
   devtool: "source-map",
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   loader: "babel-loader",
-      // },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "babel-loader",
+      },
       // {
       //   test: /\.css$/,
       //   use: ["style-loader", "css-loader"],

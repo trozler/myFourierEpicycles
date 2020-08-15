@@ -53,7 +53,7 @@ export let userSketch = function (pFIVE) {
   pFIVE.setup = function () {
     let cnv = pFIVE.createCanvas(700, 600);
     cnv.parent("draw-yourself");
-    pFIVE.frameRate(30);
+    pFIVE.frameRate(35);
     cnv.mousePressed(pFIVE.mouseDown);
     cnv.mouseReleased(pFIVE.mouseUp);
   };
