@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
-      myFourierEpicycles cycles.
+      myFourierEpicycles.
     </title>
     <link
       rel="stylesheet"
@@ -18,10 +18,16 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
-    <header>
-      myFourierEpicycles cycles.
-      <p>By Tony Rosler.</p>
+    <header class="typewriter">
+      <br>
+      <div id="typedtext">
+      </div>
     </header>
+    <div>
+      <p>This website allows you to draw your own fourier epicycle drawings, either by uploading an svg or by mouse. I had a lot of fun creating this, so at the end there is a short article attempting to give the reader some mathematical intuition as to how revolving circles and the fourier transform are connected.
+      </p>
+      <p>My motivation for this website is to try and fill a gap left by other work (mentioned at the end), and allow users to upload and draw their own fourier epicycles. The current implemenation is far from perfect, but I think its a good start.</p>
+    </div>
     <div id="startup">
       <table>
         <tr>
@@ -52,14 +58,22 @@
             </a>
           </td>
         </tr>
+        <tr>
+          <td>
+            <a href="">
+              <img src="" alt="dragon" class="base_img" id="dragon" />
+            </a>
+          </td>
+        </tr>
       </table>
     </div>
     <h3>
       Upload an image and see its epicycles.
       <br />
       <span style="font-size: 80%;"
-        >For clearest drawings upload black and white SVGs with single or double paths, that are less than 50kb.</span
-      >
+        >For fast and clear drawings upload SVGs that are less than 50kb.</span>
+      <br>
+      <span style="font-size: 70%;"> Unfortunatly larger and complicated files currently requiere manual tinkering of paramaters.</span>
     </h3>
     <div>
       <form action="/target" class="dropzone" id="my-dropzone">
@@ -74,7 +88,7 @@
     <div id="upload-sketch"></div>
     <h3>Draw your own below!</h3>
     <div id="draw-yourself"></div>
-    <h3>What is a fourier series? An intuitive argument.</h3>
+    <h3>What is a fourier series? A mathematical intuitive argument (I hope).</h3>
     <p>
       $$f(t) = \frac{1}{P}(c_{-N} \cdot e^{i2\pi t\frac{-N}{P}}) + ... +
       \frac{1}{P}(c_1 \cdot e^{i2\pi t\frac{1}{P}}) + ... + \frac{1}{P}(c_N
@@ -108,7 +122,7 @@
         target="_blank"
         >polar form, </a
       >
-      lies on a circle by defintion. We also observee that complex numbers in
+      lies on a circle by defintion. Also observe that complex numbers in
       polar form can be neatly represented by euler's formula. For example:
       $\small z = x + iy = r(cos(t) + i sin(t)) = re^{i t}$. Now if we increase
       $\small t$ (or time) by 1 unit, the new complex number is equivilent to
@@ -126,7 +140,7 @@
       <br />
       So therfore, since the fourier series expresses a function as a sum of
       complex sinusoids (these are also functions remember), and the outputs of
-      these functions are entirely described by circles in the complex plane. Means
+      these functions are entirely described by circles in the complex plane, means
       we can represent each complex sinusoid by a circle and a revolving vector.
       Hence, we can represent a function as a sum of revolving circles and
       vectors. Connected them tip to toe (i.e. adding them together) to find the final drawing.
@@ -216,15 +230,13 @@
     <p>
       <a href="http://www.jezzamon.com/fourier/index.html" target="_blank"
         >'An interactive introduction to the fourier transform'</a
-      >
-      - great visuals helped me build intuition and get started. Code is open
-      source!
+      > this article really helped me a lot. Gives excellent animations with explinations.
     </p>
     <p>
       <a href="https://www.youtube.com/watch?v=MY4luNgGfms" target="_blank"
         >The Coding Train</a
       >
-      gives a basic guide on how you can create your own epicycles.
+      gives a nice guide on how you can draw your own epicycles. 
     </p>
     <p>
       I have open sourced the code and you can find it on my

@@ -1,16 +1,6 @@
 import { ImageTracer } from "./imagetracer_v1.2.6.js";
 
 /**
- * @param {String} HTML representing any number of sibling elements
- * @return {NodeList}
- */
-function htmlToElements(html) {
-  let template = document.createElement("template");
-  template.innerHTML = html;
-  return template.content.childNodes[0].firstChild;
-}
-
-/**
  * @param {String} imageurl. Image can be .png, .jpeg
  * @param {boolean} draw. True if you want the points dsiplayed.
  * @param {Number} n_points.
@@ -55,33 +45,7 @@ export function pathfinderImage(imageurl, cback, factor) {
  * @return {Array<SVGPointList>}.
  */
 export function pathfinderSVG(pathTags, factor) {
-  // var svgstr =
-  //   "<svg " +
-  //   'width="350px" height="400px"' +
-  //   'viewBox="0 0 700 600"' +
-  //   'preserveAspectRatio="xMidYMid meet"' +
-  //   'version="1.1" xmlns="http://www.w3.org/2000/svg" >';
 
-  // svgstr +=
-  //   '<path d="' + pathstring.split('d="')[1].replace("/>", "").replace('"', "");
-  // for (let k = 1; k < pathTags.length; k++) {
-  //   let pathstring = pathTags[k].outerHTML;
-  //   svgstr += pathstring.split('d="')[1].replace("/>", "").replace('"', "");
-  // }
-  // svgstr += '"' + " stroke='rgb(0,0,0)' fill='transparent' />";
-  // svgstr += "</svg>";
-
-  // svgstr = svgstr.slice(svgstr.indexOf("<svg"));
-  // let container = document.getElementById("svgholder");
-  // container.innerHTML = svgstr;
-  // let pathstring = pathTags[0].outerHTML;
-
-  // let canvas = document.getElementById("pointscanvas");
-  // let canvasWidth = canvas.width;
-  // let canvasHeight = canvas.height;
-  // var ctx = canvas.getContext("2d");
-
-  // let htmlsvg = htmlToElements(svgstr);
   let arr = [];
   for (let j = 0; j < pathTags.length; j++) {
     //Find points
@@ -93,7 +57,6 @@ export function pathfinderSVG(pathTags, factor) {
     for (let i = 0; i < n_points; i++) {
       let point = path.getPointAtLength((i / n_points) * pathLength);
       arr[j].push(point);
-      // ctx.fillRect(point.x, point.y, 2, 2);
     }
   }
 

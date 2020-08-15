@@ -15,7 +15,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
+    "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
+    "@babel/runtime": "^7.11.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
     "dot-prop": "^5.2.0",
@@ -28,7 +30,8 @@
   },
   "watch": {
     "webpack": "src/js/**/*.js",
-    "css": "src/css/style.css"
+    "css": "src/css/style.css",
+    "html": "src/index.html"
   },
   "scripts": {
     "watch": "npm-watch",
@@ -36,7 +39,8 @@
     "webpack-prod": "webpack --mode=production || exit 1",
     "css": "cp -r src/css dist/",
     "html": "cp src/indexSrc.html dist/index.html",
-    "build": "npm run css && npm run html && npm run webpack"
+    "dev": "npm run css && npm run html && npm run webpack",
+    "build": "npm run css && npm run html && npm run webpack-prod"
   },
   "repository": {
     "type": "git",

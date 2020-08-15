@@ -1,6 +1,7 @@
 import { imageHandler, BASE } from "./baseEpi.js";
 import { mainPathFinder } from "./mainSketcher.js";
 import { addScrollEvenListener, optimiseSvg } from "./util.js";
+import { typewriter } from "./typewriter.js";
 
 import * as Dropzone from "DropzoneMin/dropzone.min.js";
 
@@ -13,8 +14,9 @@ import Deer from "../images/Deer.svg";
 import Dog from "../images/Dog.svg";
 import Tux from "../images/tux.svg";
 import Epl from "../images/epl-icon.svg";
+import Dragon from "../images/dragon.svg";
 
-const imageNames = { deer: Deer, epl: Epl, tux: Tux, dog: Dog };
+const imageNames = { deer: Deer, epl: Epl, tux: Tux, dog: Dog, dragon: Dragon };
 
 for (let n in imageNames) {
   document.getElementById(n).src = imageNames[n]; //Adding source to image, as webpack.
@@ -33,6 +35,7 @@ window.addEventListener(
   (e) => {
     e.preventDefault();
     imageHandler("deer");
+    typewriter();
   },
   { once: true }
 );
