@@ -1,8 +1,13 @@
-import { imageHandler, BASE } from "./baseEpi.js";
+import { imageHandlerCache } from "./baseCacheHandler.js";
+import { imageHandler, BASE } from "./baseHandler.js";
 import { mainPathFinder } from "./mainSketcher.js";
-import { addScrollEvenListener, optimiseSvg } from "./util.js";
+import {
+  addScrollEvenListener,
+  optimiseSvg,
+  cacheHasItem,
+  getFromStorage,
+} from "./util.js";
 import { typewriter } from "./typewriter.js";
-
 import * as Dropzone from "DropzoneMin/dropzone.min.js";
 
 //Styling
@@ -16,16 +21,25 @@ import Tux from "../images/tux.svg";
 import Epl from "../images/epl-icon.svg";
 import Dragon from "../images/dragon.svg";
 
-const imageNames = { deer: Deer, epl: Epl, tux: Tux, dog: Dog, dragon: Dragon };
+const imageNames = {
+  deer: Deer,
+  epl: Epl,
+  tux: Tux,
+  dog: Dog,
+  dragon: Dragon,
+};
 
 for (let n in imageNames) {
   document.getElementById(n).src = imageNames[n]; //Adding source to image, as webpack.
+
+  imageNames[n] = decodeURIComponent(imageNames[n]);
+  imageNames[n] = imageNames[n].slice(imageNames[n].indexOf("<svg"));
 
   //Add event listener for click on each image.
   document.getElementById(n).addEventListener("click", (e) => {
     e.preventDefault();
     BASE.removeP5();
-    imageHandler(n);
+    handleCache(n);
   });
 }
 
@@ -34,7 +48,7 @@ window.addEventListener(
   "load",
   (e) => {
     e.preventDefault();
-    imageHandler("deer");
+    handleCache("deer");
     typewriter();
   },
   { once: true }
@@ -42,6 +56,16 @@ window.addEventListener(
 
 //Add event listener to some canvases, only animate when in viewbox.
 addScrollEvenListener(BASE);
+
+function handleCache(key) {
+  //Check cache for entry.
+  if (cacheHasItem(key)) {
+    const cachEntry = getFromStorage(key);
+    imageHandlerCache(BASE, cachEntry.fourierX, cachEntry.fourierY);
+  } else {
+    imageHandler(key, imageNames[key]);
+  }
+}
 
 Dropzone.options.myDropzone = {
   addRemoveLinks: true,
