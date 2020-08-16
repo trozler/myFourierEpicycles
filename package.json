@@ -25,6 +25,7 @@
     "html-loader": "^1.1.0",
     "npm-watch": "^0.6.0",
     "style-loader": "^1.2.1",
+    "svg-url-loader": "^6.0.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
@@ -39,8 +40,8 @@
     "webpack-prod": "webpack --mode=production || exit 1",
     "css": "cp -r src/css dist/",
     "html": "cp src/indexSrc.html dist/index.html",
-    "dev": "npm run css && npm run html && npm run webpack",
-    "build": "npm run css && npm run html && npm run webpack-prod"
+    "build": "npm run css && npm run html && npm run webpack",
+    "prod": "npm run css && npm run html && npm run webpack-prod"
   },
   "repository": {
     "type": "git",

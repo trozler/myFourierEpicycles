@@ -61,3 +61,26 @@ function updateManySketch(inFrame, EL) {
     }
   }
 }
+
+export function cacheHasItem(key) {
+  return true ? localStorage.getItem(key) !== null : false;
+}
+
+export function writeToStorage(key, arrx, arry) {
+  if (cacheHasItem(key)) {
+    throw new Error("Error, cache entry already exists for " + key);
+  } else {
+    localStorage.setItem(
+      key,
+      JSON.stringify({ fourierX: arrx, fourierY: arry })
+    );
+  }
+}
+
+export function getFromStorage(key) {
+  if (!cacheHasItem(key)) {
+    throw new Error("Error, key not found in cache.");
+  } else {
+    return JSON.parse(localStorage.getItem(key));
+  }
+}

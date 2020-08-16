@@ -1,49 +1,8 @@
 import { epiCycles } from "./epicycles.js";
-import { reindeerX, reindeerY } from "./computedPaths/fourier/reindeer.js";
-import { dogX, dogY } from "./computedPaths/fourier/dog.js";
-import { eplX, eplY } from "./computedPaths/fourier/epl.js";
-import { tuxX, tuxY } from "./computedPaths/fourier/tux.js";
-import { dragonX, dragonY } from "./computedPaths/fourier/dragon.js";
-import pFiveSketch from "./pFiveSketch.js";
-
 import * as p5 from "p5";
 
-export const BASE = new pFiveSketch();
-
-export function imageHandler(name) {
+export function imageHandlerCache(BASE, fourierX, fourierY) {
   let baseSketch = function (pFIVE) {
-    let fourierX;
-    let fourierY;
-
-    switch (name) {
-      case "deer":
-        fourierX = reindeerX;
-        fourierY = reindeerY;
-        break;
-
-      case "epl":
-        fourierX = eplX;
-        fourierY = eplY;
-        break;
-
-      case "dog":
-        fourierX = dogX;
-        fourierY = dogY;
-        break;
-
-      case "tux":
-        fourierX = tuxX;
-        fourierY = tuxY;
-        break;
-
-      case "dragon":
-        fourierX = dragonX;
-        fourierY = dragonY;
-        break;
-
-      default:
-        throw new Error("Error, no match found for the base image selected.");
-    }
     let time = 0;
     let path = [];
     pFIVE.setup = function () {
