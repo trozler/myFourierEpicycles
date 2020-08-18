@@ -24,6 +24,12 @@ module.exports = {
   },
   mode: "development",
   devtool: "source-map",
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: "vendors",
+    },
+  },
   module: {
     rules: [
       // {
