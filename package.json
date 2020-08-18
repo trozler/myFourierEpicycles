@@ -10,7 +10,6 @@
     "dropzone": "^5.7.2",
     "mathjax": "^3.0.5",
     "p5": "^1.1.9",
-    "socket.io-client": "^2.3.0",
     "svgo": "^1.3.2"
   },
   "devDependencies": {
@@ -41,7 +40,9 @@
     "css": "cp -r src/css dist/",
     "html": "cp src/indexSrc.html dist/index.html",
     "build": "npm run css && npm run html && npm run webpack",
-    "prod": "npm run css && npm run html && npm run webpack-prod"
+    "prod": "npm run css && npm run html && npm run webpack-prod",
+    "prod:analyze": "npm run prod -- --env.addons=bundleanalyzer",
+    "build:analyze": "npm run build -- --env.addons=bundleanalyzer"
   },
   "repository": {
     "type": "git",

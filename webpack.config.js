@@ -13,7 +13,7 @@ module.exports = {
   //   nodeEnv: "production",
   //   minimize: true,
   // },
-  watch: true,
+  watch: false,
   watchOptions: {
     aggregateTimeout: 10000,
     ignored: [
@@ -24,13 +24,19 @@ module.exports = {
   },
   mode: "development",
   devtool: "source-map",
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: "vendors",
+    },
+  },
   module: {
     rules: [
-      // {
-      //   test: /\.m?js$/,
-      //   exclude: /(node_modules|bower_components)/,
-      //   loader: "babel-loader",
-      // },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "babel-loader",
+      },
       // {
       //   test: /\.css$/,
       //   use: ["style-loader", "css-loader"],
