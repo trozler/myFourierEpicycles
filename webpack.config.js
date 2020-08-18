@@ -27,7 +27,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: "vendors",
+      filename: "vendors.main.bundle.js",
     },
   },
   module: {
@@ -37,18 +37,6 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
       },
-      // {
-      //   test: /\.css$/,
-      //   use: ["style-loader", "css-loader"],
-      // },
-      // {
-      //   test: /\.(png|svg|jpg)$/,
-      //   loader: "file-loader",
-      //   options: {
-      //     name: "[name].[ext]",
-      //     outputPath: "images/",
-      //   },
-      // },
       {
         test: /\.svg$/,
         use: {
