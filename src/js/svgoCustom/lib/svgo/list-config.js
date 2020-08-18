@@ -1,4 +1,4 @@
-var listPlugins = {
+export var allPlugs = {
   plugins: [
     "removeDoctype",
     "removeXMLProcInst",
@@ -52,4 +52,4 @@ var listPlugins = {
   ],
 };
 
-module.exports.listPlugins = listPlugins;
+

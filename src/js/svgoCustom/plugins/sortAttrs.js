@@ -1,21 +1,31 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = false;
+export var type = "perItem";
 
-exports.description = 'sorts element attributes (disabled by default)';
+export var active = false;
 
-exports.params = {
-	order: [
-		'id',
-		'width', 'height',
-		'x', 'x1', 'x2',
-		'y', 'y1', 'y2',
-		'cx', 'cy', 'r',
-		'fill', 'stroke', 'marker',
-		'd', 'points'
-	]
+export var description = "sorts element attributes (disabled by default)";
+
+export var params = {
+  order: [
+    "id",
+    "width",
+    "height",
+    "x",
+    "x1",
+    "x2",
+    "y",
+    "y1",
+    "y2",
+    "cx",
+    "cy",
+    "r",
+    "fill",
+    "stroke",
+    "marker",
+    "d",
+    "points",
+  ],
 };
 
 /**
@@ -26,59 +36,53 @@ exports.params = {
  *
  * @author Nikolay Frantsev
  */
-exports.fn = function(item, params) {
+export var fn = function (item, params) {
+  var attrs = [],
+    sorted = {},
+    orderlen = params.order.length + 1,
+    xmlnsOrder = params.xmlnsOrder || "front";
 
-	var attrs = [],
-		sorted = {},
-		orderlen = params.order.length + 1,
-		xmlnsOrder = params.xmlnsOrder || 'front';
+  if (item.elem) {
+    item.eachAttr(function (attr) {
+      attrs.push(attr);
+    });
 
-	if (item.elem) {
+    attrs.sort(function (a, b) {
+      if (a.prefix != b.prefix) {
+        // xmlns attributes implicitly have the prefix xmlns
+        if (xmlnsOrder == "front") {
+          if (a.prefix == "xmlns") return -1;
+          if (b.prefix == "xmlns") return 1;
+        }
+        return a.prefix < b.prefix ? -1 : 1;
+      }
 
-		item.eachAttr(function(attr) {
-			attrs.push(attr);
-		});
+      var aindex = orderlen;
+      var bindex = orderlen;
 
-		attrs.sort(function(a, b) {
-			if (a.prefix != b.prefix) {
-				// xmlns attributes implicitly have the prefix xmlns
-				if (xmlnsOrder == 'front') {
-                    if (a.prefix == 'xmlns')
-                        return -1;
-                    if (b.prefix == 'xmlns')
-                        return 1;
-                }
-				return a.prefix < b.prefix ? -1 : 1;
-			}
+      for (var i = 0; i < params.order.length; i++) {
+        if (a.name == params.order[i]) {
+          aindex = i;
+        } else if (a.name.indexOf(params.order[i] + "-") === 0) {
+          aindex = i + 0.5;
+        }
+        if (b.name == params.order[i]) {
+          bindex = i;
+        } else if (b.name.indexOf(params.order[i] + "-") === 0) {
+          bindex = i + 0.5;
+        }
+      }
 
-			var aindex = orderlen;
-			var bindex = orderlen;
+      if (aindex != bindex) {
+        return aindex - bindex;
+      }
+      return a.name < b.name ? -1 : 1;
+    });
 
-			for (var i = 0; i < params.order.length; i++) {
-				if (a.name == params.order[i]) {
-					aindex = i;
-				} else if (a.name.indexOf(params.order[i] + '-') === 0) {
-					aindex = i + .5;
-				}
-				if (b.name == params.order[i]) {
-					bindex = i;
-				} else if (b.name.indexOf(params.order[i] + '-') === 0) {
-					bindex = i + .5;
-				}
-			}
+    attrs.forEach(function (attr) {
+      sorted[attr.name] = attr;
+    });
 
-			if (aindex != bindex) {
-				return aindex - bindex;
-			}
-			return a.name < b.name ? -1 : 1;
-		});
-
-		attrs.forEach(function (attr) {
-			sorted[attr.name] = attr;
-		});
-
-		item.attrs = sorted;
-
-	}
-
+    item.attrs = sorted;
+  }
 };

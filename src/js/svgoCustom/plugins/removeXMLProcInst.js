@@ -1,10 +1,10 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = true;
+export var type = "perItem";
 
-exports.description = 'removes XML processing instructions';
+export var active = true;
+
+export var description = "removes XML processing instructions";
 
 /**
  * Remove XML Processing Instruction.
@@ -17,8 +17,8 @@ exports.description = 'removes XML processing instructions';
  *
  * @author Kir Belevich
  */
-exports.fn = function(item) {
-
-    return !(item.processinginstruction && item.processinginstruction.name === 'xml');
-
+export var fn = function (item) {
+  return !(
+    item.processinginstruction && item.processinginstruction.name === "xml"
+  );
 };

@@ -1,4 +1,4 @@
-import SVGO from "./svgoCustom/lib/svgo.js";
+import { SVGO } from "./svgoCustom/lib/svgo.js";
 
 const svgo = new SVGO();
 

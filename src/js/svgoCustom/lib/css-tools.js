@@ -1,10 +1,10 @@
 'use strict';
 
-var csstree     = require('css-tree'),
-    List        = csstree.List,
-    stable      = require('stable'),
-    specificity = require('csso/lib/restructure/prepare/specificity');
 
+import * as csstree from "css-tree"
+import * as stable from "stable"
+import * as specificity from "csso/lib/restructure/prepare/specificity"
+var List        = csstree.List
 
 /**
  * Flatten a CSS AST to a selectors list.
@@ -12,7 +12,7 @@ var csstree     = require('css-tree'),
  * @param {Object} cssAst css-tree AST to flatten
  * @return {Array} selectors
  */
-function flattenToSelectors(cssAst) {
+export function flattenToSelectors(cssAst) {
     var selectors = [];
 
     csstree.walk(cssAst, {visit: 'Rule', enter: function(node) {
@@ -55,7 +55,7 @@ function flattenToSelectors(cssAst) {
  * @param {Array} useMqs Array with strings of media queries that should pass (<name> <expression>)
  * @return {Array} Filtered selectors that match the passed media queries
  */
-function filterByMqs(selectors, useMqs) {
+export function filterByMqs(selectors, useMqs) {
     return selectors.filter(function(selector) {
         if (selector.atrule === null) {
             return ~useMqs.indexOf('');
@@ -80,7 +80,7 @@ function filterByMqs(selectors, useMqs) {
  * @param {Array} usePseudos Array with strings of single or sequence of pseudo-elements and/or -classes that should pass
  * @return {Array} Filtered selectors that match the passed pseudo-elements and/or -classes
  */
-function filterByPseudos(selectors, usePseudos) {
+export function filterByPseudos(selectors, usePseudos) {
     return selectors.filter(function(selector) {
         var pseudoSelectorsStr = csstree.generate({
             type: 'Selector',
@@ -98,7 +98,7 @@ function filterByPseudos(selectors, usePseudos) {
  * @param {Array} selectors to clean
  * @return {Array} Selectors without pseudo-elements and/or -classes
  */
-function cleanPseudos(selectors) {
+export function cleanPseudos(selectors) {
     selectors.forEach(function(selector) {
         selector.pseudos.forEach(function(pseudo) {
             pseudo.list.remove(pseudo.item);
@@ -115,7 +115,7 @@ function cleanPseudos(selectors) {
  * @param {Array} bSpecificity Specificity of selector B
  * @return {Number} Score of selector specificity A compared to selector specificity B
  */
-function compareSpecificity(aSpecificity, bSpecificity) {
+export function compareSpecificity(aSpecificity, bSpecificity) {
     for (var i = 0; i < 4; i += 1) {
         if (aSpecificity[i] < bSpecificity[i]) {
             return -1;
@@ -135,7 +135,7 @@ function compareSpecificity(aSpecificity, bSpecificity) {
  * @param {Object} bSimpleSelectorNode Simple selector B
  * @return {Number} Score of selector A compared to selector B
  */
-function compareSimpleSelectorNode(aSimpleSelectorNode, bSimpleSelectorNode) {
+export function compareSimpleSelectorNode(aSimpleSelectorNode, bSimpleSelectorNode) {
     var aSpecificity = specificity(aSimpleSelectorNode),
         bSpecificity = specificity(bSimpleSelectorNode);
     return compareSpecificity(aSpecificity, bSpecificity);
@@ -152,7 +152,7 @@ function _bySelectorSpecificity(selectorA, selectorB) {
  * @param {Array} selectors to be sorted
  * @return {Array} Stable sorted selectors
  */
-function sortSelectors(selectors) {
+export function sortSelectors(selectors) {
     return stable(selectors, _bySelectorSpecificity);
 }
 
@@ -163,7 +163,7 @@ function sortSelectors(selectors) {
  * @param {Object} declaration css-tree style declaration
  * @return {Object} CSSStyleDeclaration property
  */
-function csstreeToStyleDeclaration(declaration) {
+export function csstreeToStyleDeclaration(declaration) {
     var propertyName = declaration.property,
         propertyValue = csstree.generate(declaration.value),
         propertyPriority = (declaration.important ? 'important' : '');
@@ -181,7 +181,7 @@ function csstreeToStyleDeclaration(declaration) {
  * @param {Object} element style element
  * @return {String|Array} CSS string or empty array if no styles are set
  */
-function getCssStr(elem) {
+export function getCssStr(elem) {
     return elem.content[0].text || elem.content[0].cdata || [];
 }
 
@@ -192,7 +192,7 @@ function getCssStr(elem) {
  * @param {String} CSS string to be set
  * @return {Object} reference to field with CSS
  */
-function setCssStr(elem, css) {
+export function setCssStr(elem, css) {
     // in case of cdata field
     if(elem.content[0].cdata) {
         elem.content[0].cdata = css;
@@ -205,18 +205,3 @@ function setCssStr(elem, css) {
 }
 
 
-module.exports.flattenToSelectors = flattenToSelectors;
-
-module.exports.filterByMqs = filterByMqs;
-module.exports.filterByPseudos = filterByPseudos;
-module.exports.cleanPseudos = cleanPseudos;
-
-module.exports.compareSpecificity = compareSpecificity;
-module.exports.compareSimpleSelectorNode = compareSimpleSelectorNode;
-
-module.exports.sortSelectors = sortSelectors;
-
-module.exports.csstreeToStyleDeclaration = csstreeToStyleDeclaration;
-
-module.exports.getCssStr = getCssStr;
-module.exports.setCssStr = setCssStr;

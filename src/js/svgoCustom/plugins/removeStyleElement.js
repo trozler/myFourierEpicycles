@@ -1,10 +1,10 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = false;
+export var type = "perItem";
 
-exports.description = 'removes <style> element (disabled by default)';
+export var active = false;
+
+export var description = "removes <style> element (disabled by default)";
 
 /**
  * Remove <style>.
@@ -16,8 +16,6 @@ exports.description = 'removes <style> element (disabled by default)';
  *
  * @author Betsy Dupuis
  */
-exports.fn = function(item) {
-
-    return !item.isElem('style');
-
+export var fn = function (item) {
+  return !item.isElem("style");
 };

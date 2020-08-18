@@ -1,10 +1,10 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = false;
+export var type = "perItem";
 
-exports.description = 'removes <script> elements (disabled by default)';
+export var active = false;
+
+export var description = "removes <script> elements (disabled by default)";
 
 /**
  * Remove <script>.
@@ -16,8 +16,6 @@ exports.description = 'removes <script> elements (disabled by default)';
  *
  * @author Patrick Klingemann
  */
-exports.fn = function(item) {
-
-    return !item.isElem('script');
-
+export var fn = function (item) {
+  return !item.isElem("script");
 };

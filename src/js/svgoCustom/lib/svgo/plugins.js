@@ -10,7 +10,7 @@
  * @param {Object} plugins plugins object from config
  * @return {Object} output data
  */
-module.exports = function(data, info, plugins) {
+export function PLUGINS(data, info, plugins) {
 
     plugins.forEach(function(group) {
 

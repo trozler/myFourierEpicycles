@@ -1,14 +1,17 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = true;
+export var type = "perItem";
 
-exports.description = 'removes non-inheritable group’s presentational attributes';
+export var active = true;
 
-var inheritableAttrs = require('./_collections').inheritableAttrs,
-    attrsGroups = require('./_collections').attrsGroups,
-    applyGroups = require('./_collections').presentationNonInheritableGroupAttrs;
+export var description =
+  "removes non-inheritable group’s presentational attributes";
+
+import {
+  inheritableAttrs,
+  attrsGroups,
+  presentationNonInheritableGroupAttrs as applyGroups,
+} from "./_collections";
 
 /**
  * Remove non-inheritable group's "presentation" attributes.
@@ -18,20 +21,16 @@ var inheritableAttrs = require('./_collections').inheritableAttrs,
  *
  * @author Kir Belevich
  */
-exports.fn = function(item) {
-
-    if (item.isElem('g')) {
-
-        item.eachAttr(function(attr) {
-            if (
-                ~attrsGroups.presentation.indexOf(attr.name) &&
-                !~inheritableAttrs.indexOf(attr.name) &&
-                !~applyGroups.indexOf(attr.name)
-            ) {
-                item.removeAttr(attr.name);
-            }
-        });
-
-    }
-
+export var fn = function (item) {
+  if (item.isElem("g")) {
+    item.eachAttr(function (attr) {
+      if (
+        ~attrsGroups.presentation.indexOf(attr.name) &&
+        !~inheritableAttrs.indexOf(attr.name) &&
+        !~applyGroups.indexOf(attr.name)
+      ) {
+        item.removeAttr(attr.name);
+      }
+    });
+  }
 };

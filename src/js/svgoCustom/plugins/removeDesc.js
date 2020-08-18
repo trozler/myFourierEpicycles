@@ -1,14 +1,14 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = true;
+export var type = "perItem";
 
-exports.params = {
-    removeAny: true
+export var active = true;
+
+export var params = {
+  removeAny: true,
 };
 
-exports.description = 'removes <desc>';
+export var description = "removes <desc>";
 
 var standardDescs = /^(Created with|Created using)/;
 
@@ -24,9 +24,13 @@ var standardDescs = /^(Created with|Created using)/;
  *
  * @author Daniel Wabyick
  */
-exports.fn = function(item, params) {
-
-    return !item.isElem('desc') || !(params.removeAny || item.isEmpty() ||
-            standardDescs.test(item.content[0].text));
-
+export var fn = function (item, params) {
+  return (
+    !item.isElem("desc") ||
+    !(
+      params.removeAny ||
+      item.isEmpty() ||
+      standardDescs.test(item.content[0].text)
+    )
+  );
 };

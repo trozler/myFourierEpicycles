@@ -1,10 +1,9 @@
-'use strict';
 
-exports.type = 'perItem';
+export var type = "perItem";
 
-exports.active = true;
+export var active = true;
 
-exports.description = 'removes <metadata>';
+export var description = "removes <metadata>";
 
 /**
  * Remove <metadata>.
@@ -16,8 +15,6 @@ exports.description = 'removes <metadata>';
  *
  * @author Kir Belevich
  */
-exports.fn = function(item) {
-
-    return !item.isElem('metadata');
-
+export var fn = function (item) {
+  return !item.isElem("metadata");
 };

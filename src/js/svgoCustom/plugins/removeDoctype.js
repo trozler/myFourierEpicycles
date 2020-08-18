@@ -1,10 +1,10 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = true;
+export var type = "perItem";
 
-exports.description = 'removes doctype declaration';
+export var active = true;
+
+export var description = "removes doctype declaration";
 
 /**
  * Remove DOCTYPE declaration.
@@ -31,10 +31,8 @@ exports.description = 'removes doctype declaration';
  *
  * @author Kir Belevich
  */
-exports.fn = function(item) {
-
-    if (item.doctype) {
-        return false;
-    }
-
+export var fn = function (item) {
+  if (item.doctype) {
+    return false;
+  }
 };

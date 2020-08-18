@@ -1,7 +1,7 @@
 'use strict';
 
 // http://www.w3.org/TR/SVG11/intro.html#Definitions
-exports.elemsGroups = {
+export var elemsGroups = {
     animation: ['animate', 'animateColor', 'animateMotion', 'animateTransform', 'set'],
     descriptive: ['desc', 'metadata', 'title'],
     shape: ['circle', 'ellipse', 'line', 'path', 'polygon', 'polyline', 'rect'],
@@ -15,10 +15,10 @@ exports.elemsGroups = {
     filterPrimitive: ['feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feFlood', 'feGaussianBlur', 'feImage', 'feMerge', 'feMorphology', 'feOffset', 'feSpecularLighting', 'feTile', 'feTurbulence']
 };
 
-exports.pathElems = ['path', 'glyph', 'missing-glyph'];
+export var pathElems = ['path', 'glyph', 'missing-glyph'];
 
 // http://www.w3.org/TR/SVG11/intro.html#Definitions
-exports.attrsGroups = {
+export var attrsGroups = {
     animationAddition: ['additive', 'accumulate'],
     animationAttributeTarget: ['attributeType', 'attributeName'],
     animationEvent: ['onbegin', 'onend', 'onrepeat', 'onload'],
@@ -97,7 +97,7 @@ exports.attrsGroups = {
     transferFunction: ['type', 'tableValues', 'slope', 'intercept', 'amplitude', 'exponent', 'offset']
 };
 
-exports.attrsGroupsDefaults = {
+export var attrsGroupsDefaults = {
     core: {'xml:space': 'preserve'},
     filterPrimitive: {x: '0', y: '0', width: '100%', height: '100%'},
     presentation: {
@@ -157,7 +157,7 @@ exports.attrsGroupsDefaults = {
 };
 
 // http://www.w3.org/TR/SVG11/eltindex.html
-exports.elems = {
+export var elems = {
     a: {
         attrsGroups: [
             'conditionalProcessing',
@@ -2265,7 +2265,7 @@ exports.elems = {
 };
 
 // http://wiki.inkscape.org/wiki/index.php/Inkscape-specific_XML_attributes
-exports.editorNamespaces = [
+export var editorNamespaces = [
     'http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd',
     'http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd',
     'http://www.inkscape.org/namespaces/inkscape',
@@ -2291,7 +2291,7 @@ exports.editorNamespaces = [
 ];
 
 // http://www.w3.org/TR/SVG11/linking.html#processingIRI
-exports.referencesProps = [
+export var referencesProps = [
     'clip-path',
     'color-profile',
     'fill',
@@ -2305,7 +2305,7 @@ exports.referencesProps = [
 ];
 
 // http://www.w3.org/TR/SVG11/propidx.html
-exports.inheritableAttrs = [
+export var inheritableAttrs = [
     'clip-rule',
     'color',
     'color-interpolation',
@@ -2353,7 +2353,7 @@ exports.inheritableAttrs = [
     'writing-mode'
 ];
 
-exports.presentationNonInheritableGroupAttrs = [
+export var presentationNonInheritableGroupAttrs = [
     'display',
     'clip-path',
     'filter',
@@ -2366,7 +2366,7 @@ exports.presentationNonInheritableGroupAttrs = [
 ];
 
 // http://www.w3.org/TR/SVG11/single-page.html#types-ColorKeywords
-exports.colorsNames = {
+export var colorsNames = {
     'aliceblue': '#f0f8ff',
     'antiquewhite': '#faebd7',
     'aqua': '#0ff',
@@ -2517,7 +2517,7 @@ exports.colorsNames = {
     'yellowgreen': '#9acd32'
 };
 
-exports.colorsShortNames = {
+export var colorsShortNames = {
   '#f0ffff': 'azure',
   '#f5f5dc': 'beige',
   '#ffe4c4': 'bisque',
@@ -2553,6 +2553,6 @@ exports.colorsShortNames = {
 };
 
 // http://www.w3.org/TR/SVG11/single-page.html#types-DataTypeColor
-exports.colorsProps = [
+export var colorsProps = [
     'color', 'fill', 'stroke', 'stop-color', 'flood-color', 'lighting-color'
 ];

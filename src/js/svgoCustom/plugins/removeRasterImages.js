@@ -1,10 +1,10 @@
-'use strict';
 
-exports.type = 'perItem';
 
-exports.active = false;
+export var type = "perItem";
 
-exports.description = 'removes raster images (disabled by default)';
+export var active = false;
+
+export var description = "removes raster images (disabled by default)";
 
 /**
  * Remove raster images references in <image>.
@@ -16,13 +16,11 @@ exports.description = 'removes raster images (disabled by default)';
  *
  * @author Kir Belevich
  */
-exports.fn = function(item) {
-
-    if (
-        item.isElem('image') &&
-        item.hasAttrLocal('href', /(\.|image\/)(jpg|png|gif)/)
-    ) {
-        return false;
-    }
-
+export var fn = function (item) {
+  if (
+    item.isElem("image") &&
+    item.hasAttrLocal("href", /(\.|image\/)(jpg|png|gif)/)
+  ) {
+    return false;
+  }
 };
