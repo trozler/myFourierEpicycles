@@ -4,6 +4,10 @@ body {
   color: rgba(47, 72, 88);
 }
 
+#header_container {
+  width: 100%;
+}
+
 header {
   position: relative;
   text-align: center;
@@ -13,6 +17,7 @@ header {
   color: white;
   line-height: 2rem;
   font-size: 1.4rem;
+  margin: 0 auto;
 }
 
 header h1 {
@@ -36,7 +41,6 @@ p {
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
-  /* font-size: 1.2rem; */
 }
 li {
   max-width: 950px;
@@ -56,13 +60,6 @@ a:visited {
 }
 a:hover {
   color: #e91e63;
-}
-
-@media (max-width: 400px) {
-  html,
-  body {
-    font-size: 16px;
-  }
 }
 
 #drop_zone {
@@ -149,7 +146,7 @@ table {
 
 #baseCanvas {
   max-width: 700px !important;
-  width: 75% !important;
+  /* width: 75% !important; */
   margin: 0 !important;
   margin-right: 10px !important;
   margin-left: 120px !important;
@@ -165,8 +162,32 @@ table {
   background-color: white;
 }
 
+#waveCanvas {
+  width: 600px;
+  height: 400px;
+}
+
 #typedtext {
   position: absolute;
   bottom: 35px;
   width: 100%;
+}
+
+@media (max-width: 980px) {
+  body {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    font-size: 16px;
+  }
+  main {
+    margin-left: 30px;
+  }
+  .base_img {
+    width: 80px; /* Set a small width */
+    height: 80px;
+  }
 }
