@@ -53,9 +53,18 @@ export let userSketch = function (pFIVE) {
   pFIVE.setup = function () {
     let cnv = pFIVE.createCanvas(700, 600);
     cnv.parent("draw-yourself");
+    cnv.id("userCanvas");
     pFIVE.frameRate(35);
     cnv.mousePressed(pFIVE.mouseDown);
+    cnv.touchStarted(pFIVE.mouseDown);
     cnv.mouseReleased(pFIVE.mouseUp);
+    cnv.touchEnded(pFIVE.mouseUp);
+
+    document
+      .getElementById("userCanvas")
+      .addEventListener("touchmove", (evt) => evt.preventDefault(), {
+        passive: false,
+      });
   };
 
   pFIVE.draw = function () {

@@ -1,32 +1,41 @@
 var path = require("path");
+const CompressionPlugin = require("compression-webpack-plugin");
+var BrotliPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
   entry: "./src/js/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main.bundle.js",
+    filename: "main.[contenthash:8].js",
   },
   stats: {
     colors: true,
   },
-  // optimization: {
-  //   nodeEnv: "production",
-  //   minimize: true,
-  // },
+  // plugins: [
+  //   new CompressionPlugin({
+  //     filename: "[path].gz[query]",
+  //     algorithm: "gzip",
+  //     test: /\.js$|\.css$|\.html$/,
+  //     threshold: 10240,
+  //     minRatio: 0.8,
+  //   }),
+  //   new BrotliPlugin({
+  //     asset: "[path].br[query]",
+  //     test: /\.js$|\.css$|\.html$/,
+  //     threshold: 10240,
+  //     minRatio: 0.8,
+  //   }),
+  // ],
   watch: false,
   watchOptions: {
     aggregateTimeout: 10000,
-    ignored: [
-      "src/js/imagetracer_v1.2.6.js",
-      "node_modules/**",
-      "src/js/computedPaths/**",
-    ],
+    ignored: ["node_modules/**"],
   },
   mode: "development",
   devtool: "source-map",
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
       filename: "vendors.main.bundle.js",
     },
   },
