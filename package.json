@@ -20,8 +20,6 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/runtime": "^7.11.2",
     "babel-loader": "^8.1.0",
-    "brotli-webpack-plugin": "^1.1.0",
-    "compression-webpack-plugin": "^5.0.0",
     "css-loader": "^4.2.1",
     "dot-prop": "^5.2.0",
     "express-static-gzip": "^2.0.7",
@@ -42,7 +40,7 @@
     "watch": "npm-watch",
     "webpack": "webpack || exit 1",
     "webpack-prod": "webpack --mode=production || exit 1",
-    "css": "cp -r src/css dist/",
+    "css": "cp style.css dist/ && cp dropzone.min.css dist/",
     "html": "cp src/indexSrc.html dist/index.html",
     "dev": "npm run css && npm run html && npm run webpack",
     "build": "npm run css && npm run html && npm run webpack-prod"
