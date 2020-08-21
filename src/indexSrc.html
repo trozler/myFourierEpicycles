@@ -9,9 +9,9 @@
     </title>
     <link
       rel="stylesheet"
-      href="./css/dropzone.min.css"
+      href="./dropzone.min.css"
     />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <script>
       MathJax = {tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }};
     </script>
@@ -27,7 +27,7 @@
     </div>
     <main>
     <div>
-      <p>This website allows you to draw your own fourier epicycle drawings, either by uploading an svg or by mouse. I had quite a bit fun creating this, so at the end there is a very brief explination trying to give the reader some mathematical intuition as to how revolving circles and the fourier transform are connected.
+      <p>This website allows you to draw your own fourier epicycle drawings, either by uploading an svg or by mouse. I had quite a bit fun creating this, so at the end there is a brief explination trying to give the reader some mathematical intuition as to how revolving circles and the fourier transform are connected.
       </p>
       <p>My motivation for this website is to try and fill a gap left by other work (mentioned at the end), and allow users to upload and draw their own fourier epicycles. The current implemenation is far from perfect, but I think its a good start.</p>
     </div>
@@ -91,7 +91,7 @@
     <div id="upload-sketch"></div>
     <h3>Draw your own below!</h3>
     <div id="draw-yourself"></div>
-    <h3>What is a fourier series? A mathematical intuitive argument (I hope).</h3>
+    <h3>What is a fourier series?</h3>
     <p>
       $$f(t) = \frac{1}{P}(c_{-N} \cdot e^{i2\pi t\frac{-N}{P}}) + ... +
       \frac{1}{P}(c_1 \cdot e^{i2\pi t\frac{1}{P}}) + ... + \frac{1}{P}(c_N
@@ -99,10 +99,15 @@
       e^{i2\pi t\frac{n}{P}}$$
     </p>
     <p>
-      The fourier series (or inverse fourier transform) of a function $\small
-      f$, is given by a <b>sum</b> of
+      The fourier series (or inverse fourier transform) of a complex-valued function $\small
+      f$ of real variable, is given by a <b>sum</b> of
       <i>complex harmonic sinusoids</i> ($\small sine$ and $\small cosine$ waves
-      in the complex plane). In our case, $\small e^{i2\pi t\frac{n}{P}}$ gives
+      in the complex plane). Note, it is also possible to work with <i>real</i> fourier series, in which case $\small f$ is a <a
+        href="https://en.wikipedia.org/wiki/Fourier_series">real-valued function of real variable</a>. However, this makes the formula somewhat
+      messier and we will assume $\small f$ is complex valued throughout the rest of the article.
+      <br>
+      <br>
+      In our case, $\small e^{i2\pi t\frac{n}{P}}$ gives
       the family of complex harmonic sinusoids (expand using
       <a href="https://en.wikipedia.org/wiki/Euler%27s_formula" target="_blank"
         >euler's formula</a
@@ -157,11 +162,10 @@
     <h3>What do those symbols mean?</h3>
     <ul>
       <li>
-        $\small f(t)$ complex function of complex variable. In the
+        $\small f(t)$ is a complex valued function of real variable. When implementing the 
         <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform" target="_blank"
           >discrete fourier transform</a
-        >, the domain will be a list of complex values, and the first entry of
-        the list can be interperated as the coordinate at time $\small t=0$.
+        > on computers, $\small f$  will be an array of complex numbers, where $\small f(t)$ corresponds to the complex number at index $\small t$. $\small f(t)$ can also be interpreted as the point of the function/drawing at time $\small t$. 
       </li>
       <li>
         $\small c_n$ the fourier coefficient, is a complex number which encodes
@@ -169,7 +173,7 @@
         circle of radius equivilent to length.
       </li>
       <li>
-        $e^{i2\pi t\frac{n}{P}}$, is a complex function which can be
+        $\small e^{i2\pi t\frac{n}{P}}$, is a complex function which can be
         interperated as a revolving vector, whose frequency is given by $\small
         \frac{n}{P}$. i.e. Every $1$ unit of time the vector has done
         $\frac{n}{P}$ full rotations.
@@ -228,7 +232,7 @@
         target="_blank"
         >Wikepedia - fourier transform</a
       >
-      ditto.
+      ------------------------ | | ------------------------
     </p>
     <p>
       <a href="http://www.jezzamon.com/fourier/index.html" target="_blank"

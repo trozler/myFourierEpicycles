@@ -32,7 +32,7 @@ module.exports = {
     ignored: ["node_modules/**"],
   },
   mode: "development",
-  devtool: "source-map",
+  devtool: "",
   optimization: {
     splitChunks: {
       chunks: "all",
