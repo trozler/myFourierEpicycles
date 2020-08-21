@@ -1,6 +1,4 @@
 var path = require("path");
-// const CompressionPlugin = require("compression-webpack-plugin");
-// var BrotliPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
   entry: "./src/js/index.js",
@@ -30,10 +28,6 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
-      },
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.svg$/,
