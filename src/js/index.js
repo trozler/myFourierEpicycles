@@ -11,8 +11,8 @@ import { typewriter } from "./typewriter.js";
 import * as Dropzone from "DropzoneMin/dropzone.min.js";
 
 //Styling
-// import "../css/style.css"; //Include as want to minify.
-// import "../css/dropzone.css"; //Doesnt work some reason, maybe as already minified?
+import "../css/style.css";
+// import "../css/dropzone.css"; //Doesnt work some reason.
 
 //Images
 import Deer from "../images/Deer.svg";

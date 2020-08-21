@@ -40,7 +40,7 @@
     "watch": "npm-watch",
     "webpack": "webpack || exit 1",
     "webpack-prod": "webpack --mode=production || exit 1",
-    "css": "cp src/css/style.css dist/style.css && cp src/css/dropzone.min.css dist/dropzone.min.css",
+    "css": "cp src/css/dropzone.min.css dist/dropzone.min.css",
     "html": "cp src/indexSrc.html dist/index.html",
     "dev": "npm run webpack && npm run css && npm run html",
     "build": "npm run webpack-prod && npm run css && npm run html"
