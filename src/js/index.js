@@ -11,7 +11,7 @@ import { typewriter } from "./typewriter.js";
 import * as Dropzone from "DropzoneMin/dropzone.min.js";
 
 //Styling
-import "../css/style.css";
+// import "../css/style.css";
 // import "../css/dropzone.css"; //Doesnt work some reason.
 
 //Images
