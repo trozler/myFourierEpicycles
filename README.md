@@ -10,7 +10,7 @@
 
 This is the code for a website I'm creating https://www.myfourierepicycles.com/.
 
-My motivation for this website is to try and fill a gap left by other work (mentioned at the end), and allow users to upload and draw their own fourier epicycles. The current implemenation is far from perfect, but I think its a good start.
+My motivation for this website is to try and fill a gap left by other work (mentioned at the end), and allow users to upload and draw their own fourier epicycles. The current implementation is far from perfect, but I think it's a good start.
 
 The site has the following functionality:
 
