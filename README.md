@@ -1,42 +1,50 @@
 ## myFourierEpicycles - you give me an image I give you its epicycles.
 
-![Fourier][2]![License][3]
+![p5][1]![fourier][2]![License][3]
 
-![](./promo/promo_raw.gif)
-
-[2]: https://img.shields.io/badge/fourier-epicycles-blue
+[1]: https://img.shields.io/badge/-p5.js-%23ed225d
+[2]: https://img.shields.io/badge/-fourier-blue
 [3]: https://img.shields.io/badge/license-MIT-orange
 
-This is the code for a website I'm creating https://www.myfourierepicycles.com/. The site has the following functionality:
+![](promo/epicycles.gif)
 
-- Upload an image and find its fourier epicycles.
+This is the code for a website I'm creating https://www.myfourierepicycles.com/.
+
+My motivation for this website is to try and fill a gap left by other work (mentioned at the end), and allow users to upload and draw their own fourier epicycles. The current implemenation is far from perfect, but I think its a good start.
+
+The site has the following functionality:
+
+- Upload a .svg image and find its fourier epicycles.
 - Draw in an image and find its fourier epicycles.
+- A breif explination of the mathematics connecting fourier series and revolving epicycles.
 
-Something which makes this project different than other fourier epicycles websites, is that it allows users to upload any image of a variaty of forms (png, jpeg, svg, gif) and then see its epicycles.
+### Important note on image selction:
 
-### Note on image selction:
+For fast and clear drawings upload SVGs that are less than 50kb and can be made single path. It will be evident that your SVG image cannot be made single path from the output, as the fourier transform will be applied to all paths.
 
-For cleanest drawing use **closed path, medium sized svg's**. Currently the jpeg and png options work, but there is some ugly noise created during conversion. I'm working on making this conversion as lossless as possible.
+The code uses the [svgo library](https://github.com/svg/svgo) to compress and filter SVG files before they are displayed.
 
-- First find an svg you want to upload.
-- Then I highly highly recommend running the svg through an optimzer such as [this one.](https://jakearchibald.github.io/svgomg/). Doing this will make a huge differnce for your drawings.
+I apologies if some of your uploads, that satisfying these criteria, still don't work. Unfortunatly at this stage, some SVGs just requier some manual tinkering of paramaters. I'm working on this.
 
-### How to install
+### How to run locally
 
-- `git clone https://github.com/trozler/myFourierEpicycles.git`
+```
+$ git clone https://github.com/trozler/myFourierEpicycles.git
+$ npm install
+$ npm run dev
+```
+
+Now open `dist/index.html` on a local web server.
 
 ### Understanding the Fourier Transfrom
 
 For those curious, these resources are good starting points in understanding the fourier transform and the drawing of epicycles.
 
-3Blue1Brown fourier series:
-https://www.youtube.com/watch?v=r6sGWTCMz2k
+[3Blue1Brown fourier series](https://www.youtube.com/watch?v=r6sGWTCMz2k) : Great, like really great explination.
 
-3Blue1Brown fourier transform:
-https://www.youtube.com/watch?v=spUNpyF58BY
+[3Blue1Brown fourier transform](https://www.youtube.com/watch?v=spUNpyF58BY) : Just as great.
 
-More great visusals:
-http://www.jezzamon.com/fourier/index.html
+[An interactive introduction to the fourier transform](http://www.jezzamon.com/fourier/index.html) :
+This article really helped me a lot. Gives excellent animations with explinations.
 
-The Coding Train (create your own epicycles):
-https://www.youtube.com/watch?v=MY4luNgGfms
+[The Coding Train](https://www.youtube.com/watch?v=MY4luNgGfms) : Gives a nice guide on how you can draw your own epicycles.
