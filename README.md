@@ -7,7 +7,7 @@
 [2]: https://img.shields.io/badge/fourier-epicycles-blue
 [3]: https://img.shields.io/badge/license-MIT-orange
 
-This is the code for a website I'm creating myFourierEpicyles.com. The site has the following functionality:
+This is the code for a website I'm creating https://www.myfourierepicycles.com/. The site has the following functionality:
 
 - Upload an image and find its fourier epicycles.
 - Draw in an image and find its fourier epicycles.
