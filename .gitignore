@@ -7,3 +7,4 @@ test.html
 /*.env
 src/js/computedPaths/cartesian/codingtrain.js
 promo/
+.keys/
