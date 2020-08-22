@@ -6,5 +6,4 @@ test.html
 /node_modules
 /*.env
 src/js/computedPaths/cartesian/codingtrain.js
-promo/
 .keys/

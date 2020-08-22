@@ -15,7 +15,7 @@ module.exports = {
     ignored: ["node_modules/**"],
   },
   mode: "development",
-  devtool: "",
+  devtool: "source-map",
   optimization: {
     splitChunks: {
       chunks: "all",
