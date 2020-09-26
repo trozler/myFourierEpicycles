@@ -1,10 +1,11 @@
 var path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/js/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main.bundle.js",
+    filename: "main.bundle_[chunkhash].js",
   },
   stats: {
     colors: true,
@@ -19,9 +20,15 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: "all",
-      filename: "vendors.main.bundle.js",
+      filename: "vendors.bundle_[chunkhash].js",
     },
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "src/indexSrc.html",
+    }),
+  ],
   module: {
     rules: [
       {
