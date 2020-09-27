@@ -4,7 +4,7 @@
   "description": "Draw your own fourier epicycles.",
   "main": "index.js",
   "engines": {
-    "node": "14.6.0"
+    "node": "14.9.0"
   },
   "dependencies": {
     "compression": "^1.7.4",
