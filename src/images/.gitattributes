@@ -3,3 +3,4 @@ Deer.svg filter=lfs diff=lfs merge=lfs -text
 Dog.svg filter=lfs diff=lfs merge=lfs -text
 dragon.svg filter=lfs diff=lfs merge=lfs -text
 epl-icon.svg filter=lfs diff=lfs merge=lfs -text
+tux.svg filter=lfs diff=lfs merge=lfs -text
