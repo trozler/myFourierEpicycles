@@ -7,7 +7,7 @@ export function optimiseSvg(svgstr) {
     .optimize(svgstr)
     .then((val) => val.data)
     .catch((err) => {
-      consol.log(err);
+      console.log(err);
       return null;
     });
 }
@@ -40,11 +40,9 @@ function elementInView(EL) {
   const boundingRect = EL.sketchP5.canvas.getBoundingClientRect();
   return (
     boundingRect.bottom >= 0 &&
-    boundingRect.top <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
+    boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
     boundingRect.right >= 0 &&
-    boundingRect.left <=
-      (window.innerWidth || document.documentElement.clientWidth)
+    boundingRect.left <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
 
@@ -70,10 +68,7 @@ export function writeToStorage(key, arrx, arry) {
   if (cacheHasItem(key)) {
     throw new Error("Error, cache entry already exists for " + key);
   } else {
-    localStorage.setItem(
-      key,
-      JSON.stringify({ fourierX: arrx, fourierY: arry })
-    );
+    localStorage.setItem(key, JSON.stringify({ fourierX: arrx, fourierY: arry }));
   }
 }
 
