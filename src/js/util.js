@@ -7,7 +7,11 @@ export function optimiseSvg(svgstr) {
     .optimize(svgstr)
     .then((val) => val.data)
     .catch((err) => {
+<<<<<<< HEAD
       console.log(err);
+=======
+      consol.log(err);
+>>>>>>> 7849c302b2bf62f028bfb1d23b40613e3769449e
       return null;
     });
 }
@@ -68,7 +72,14 @@ export function writeToStorage(key, arrx, arry) {
   if (cacheHasItem(key)) {
     throw new Error("Error, cache entry already exists for " + key);
   } else {
+<<<<<<< HEAD
     localStorage.setItem(key, JSON.stringify({ fourierX: arrx, fourierY: arry }));
+=======
+    localStorage.setItem(
+      key,
+      JSON.stringify({ fourierX: arrx, fourierY: arry })
+    );
+>>>>>>> 7849c302b2bf62f028bfb1d23b40613e3769449e
   }
 }
 
