@@ -1,12 +1,7 @@
 import { imageHandlerCache } from "./baseCacheHandler.js";
 import { imageHandler, BASE } from "./baseHandler.js";
 import { mainPathFinder } from "./mainSketcher.js";
-import {
-  addScrollEvenListener,
-  optimiseSvg,
-  cacheHasItem,
-  getFromStorage,
-} from "./util.js";
+import { addScrollEvenListener, optimiseSvg, cacheHasItem, getFromStorage } from "./util.js";
 import { typewriter } from "./typewriter.js";
 import * as Dropzone from "DropzoneMin/dropzone.min.js";
 
@@ -16,7 +11,6 @@ import * as Dropzone from "DropzoneMin/dropzone.min.js";
 
 //Images
 import Deer from "../images/Deer.svg";
-import Dog from "../images/Dog.svg";
 import Tux from "../images/tux.svg";
 import Epl from "../images/epl-icon.svg";
 import Dragon from "../images/dragon.svg";
@@ -25,7 +19,6 @@ const imageNames = {
   deer: Deer,
   epl: Epl,
   tux: Tux,
-  dog: Dog,
   dragon: Dragon,
 };
 
@@ -51,7 +44,7 @@ window.addEventListener(
     handleCache("deer");
     typewriter();
   },
-  { once: true }
+  { once: true },
 );
 
 //Add event listener to some canvases, only animate when in viewbox.
@@ -102,7 +95,7 @@ Dropzone.options.myDropzone = {
             mainPathFinder(pathTags, true);
           }
         },
-        false
+        false,
       );
       if (file) {
         if (file.type !== "image/svg+xml") {

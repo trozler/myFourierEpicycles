@@ -28,7 +28,6 @@ export function imageHandler(name, svgData) {
 
       case "epl":
       case "tux":
-      case "dog":
       case "dragon":
         imFactor = 3;
         //TODO: Add scale for users to dictate how many epicycles.
@@ -62,12 +61,8 @@ export function imageHandler(name, svgData) {
         y.push(pathSketch[i].y);
       }
 
-      fourierX = dft(pFIVE, x).filter(
-        (f) => f.amp > minAmplitude && f.amp < maxAmplitude
-      );
-      fourierY = dft(pFIVE, y).filter(
-        (f) => f.amp > minAmplitude && f.amp < maxAmplitude
-      );
+      fourierX = dft(pFIVE, x).filter((f) => f.amp > minAmplitude && f.amp < maxAmplitude);
+      fourierY = dft(pFIVE, y).filter((f) => f.amp > minAmplitude && f.amp < maxAmplitude);
 
       //The cycles are being drawn in order of frequency. e.g. C0, C1, ... Where C1 has a frequency. Recall frequency is k and we are calulating Ck.
 
@@ -81,9 +76,7 @@ export function imageHandler(name, svgData) {
       if (cacheHasItem) {
         writeToStorage(name, fourierX, fourierY);
       } else {
-        throw new Error(
-          "Error, trying to wrote to cache in basHandler.js, but entry already exists."
-        );
+        throw new Error("Error, trying to wrote to cache in basHandler.js, but entry already exists.");
       }
     };
 
